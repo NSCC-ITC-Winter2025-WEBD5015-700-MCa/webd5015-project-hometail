@@ -1,6 +1,6 @@
 "use client";
 
-import Pricing from "@/app/components/Home/Pricing";
+// import Pricing from "@/app/components/Home/Pricing";
 import ButtonCustomerPortal from "@/app/(pages)/_components/ButtonCustomerPortal";
 import Navbar from "@/app/(pages)/_components/Navbar";
 import { useSession } from "next-auth/react";
@@ -26,7 +26,7 @@ const Subscribe = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <Pricing width={`w-[500px] max-sm:w-[350px]`} title={"Subscribe"} />
+      {/* <Pricing width={`w-[500px] max-sm:w-[350px]`} title={"Subscribe"} /> */}
       <ButtonCustomerPortal />
     </div>
   );
