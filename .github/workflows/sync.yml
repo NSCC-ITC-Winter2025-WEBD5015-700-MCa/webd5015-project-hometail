@@ -18,14 +18,25 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@users.noreply.github.com"
+
+          # Ensure git uses the GitHub token for HTTPS authentication
           git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
 
-      - name: Add Upstream and Sync
+      - name: Add Upstream Remote and Sync
         run: |
+          # Check if upstream remote exists, if not, add it using the token for authentication
           git remote get-url upstream || git remote add upstream https://${{ secrets.GITHUB_TOKEN }}@github.com/NSCC-ITC-Winter2025-WEBD5015-700-MCa/webd5015-project-hometail.git
+
+          # Fetch changes from the upstream
           git fetch upstream
+
+          # Checkout to the main branch
           git checkout main
+
+          # Merge upstream/main with local main (if necessary)
           git merge --ff-only upstream/main || true
+
+          # Push changes to the forked repository
           git push origin main
 
       - name: Deploy to Vercel
