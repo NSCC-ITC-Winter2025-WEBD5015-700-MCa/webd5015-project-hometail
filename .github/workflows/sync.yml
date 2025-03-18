@@ -19,13 +19,13 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@users.noreply.github.com"
 
-          # Ensure git uses the GitHub token for HTTPS authentication
+          # Use the GITHUB_TOKEN for HTTPS authentication
           git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
 
       - name: Add Upstream Remote and Sync
         run: |
           # Check if upstream remote exists, if not, add it using the token for authentication
-          git remote add upstream https://github.com/NSCC-ITC-Winter2025-WEBD5015-700-MCa/webd5015-project-hometail.git
+          git remote get-url upstream || git remote add upstream https://github.com/NSCC-ITC-Winter2025-WEBD5015-700-MCa/webd5015-project-hometail.git
 
           # Fetch changes from the upstream
           git fetch upstream
