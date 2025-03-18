@@ -25,7 +25,7 @@ jobs:
       - name: Add Upstream Remote and Sync
         run: |
           # Check if upstream remote exists, if not, add it using the token for authentication
-          git remote get-url upstream || git remote add upstream https://github.com/NSCC-ITC-Winter2025-WEBD5015-700-MCa/webd5015-project-hometail.git
+          git remote add upstream https://github.com/NSCC-ITC-Winter2025-WEBD5015-700-MCa/webd5015-project-hometail.git  
 
           # Fetch changes from the upstream
           git fetch upstream
