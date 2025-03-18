@@ -19,8 +19,8 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@users.noreply.github.com"
 
-          # Use the GITHUB_TOKEN for HTTPS authentication
-          git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          # Ensure git uses the Personal Access Token (PAT) for HTTPS authentication
+          git config --global url."https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
 
       - name: Add Upstream Remote and Sync
         run: |
