@@ -38,8 +38,3 @@ jobs:
 
           # Push changes to the forked repository
           git push origin main
-
-      - name: Deploy to Vercel
-        run: |
-          npm install -g vercel
-          vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
