@@ -15,14 +15,14 @@ const OAuthButtons = () => {
   const handleGoogleSignIn = () => {
     setLoading({ isGoogleLoading: true, isAppleLoading: false });
     setTimeout(
-      () => signIn("google", { redirectTo: "/dashboard/today" }),
+      () => signIn("google", { redirectTo: "/dashboard" }),
       2000
     );
   };
 
   const handleAppleSignIn = () => {
     setLoading({ isGoogleLoading: false, isAppleLoading: true });
-    setTimeout(() => signIn("apple", { redirectTo: "/dashboard/today" }), 2000);
+    setTimeout(() => signIn("apple", { redirectTo: "/dashboard" }), 2000);
   };
 
   return (

@@ -41,7 +41,7 @@ const LoginForm = ({ setLoading, loading, setError }) => {
         setLoading({ loading: false, isEmailLoading: false });
       } else {
         // Redirect to the dashboard if login is successful
-        router.push("/dashboard/today");
+        router.push("/dashboard");
       }
     } catch (error) {
       setError("Error, try again");

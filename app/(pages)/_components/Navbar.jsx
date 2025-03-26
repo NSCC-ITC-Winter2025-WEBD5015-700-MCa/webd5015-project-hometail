@@ -1,13 +1,24 @@
 "use client";
- 
+
 import ThemeSwitch from "./ThemeSwitch";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { FaFileMedical } from "react-icons/fa";
- 
+
+import { signOut, useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
+import { FaPaw } from "react-icons/fa";
+import { Loader } from "@/utils/loader";
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
- 
+
+  const { data: session, status } = useSession();
+
+  if(status === "loading") {
+    return <loader />;
+  }
+
+
   return (
     <nav
       className={`relative z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 light-text dark-text text-lg font-semibold`}
@@ -17,12 +28,12 @@ const Navbar = () => {
           href="/"
           className="flex items-center font-semibold light-text dark-text text-2xl"
         >
-          <FaFileMedical className="text-3xl mr-2 text-blue-500" />
+          <FaPaw className="text-3xl mr-2 text-blue-500" />
           HomeTail
         </Link>
- 
+
         {/* Desktop Navigation */}
- 
+
         <div className="flex gap-16 items-center max-lg:hidden">
           <Link href="#About" className="link link-hover">
             About Us
@@ -38,22 +49,29 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex gap-6 items-center max-lg:hidden">
-          <Link href="/login">
-            <button
+          {session ? <Link href="#" onClick={()=>signOut({ redirect: true, callbackUrl: '/'})}>
+            {session.user?.email} <button
               type="button"
               className="btn btn-primary text-base max-lg:hidden"
             >
-              Login/ Register
+              Logout
             </button>
-          </Link>
+          </Link> :
+            <Link href="/login">
+              <button
+                type="button"
+                className="btn btn-primary text-base max-lg:hidden"
+              >
+                Login/ Register
+              </button>
+            </Link>}
           <ThemeSwitch />
         </div>
- 
+
         {/* Mobile Hamburger Button */}
         <div
-          className={`${
-            open ? "fixed top-5 right-0" : "relative"
-          } max-lg:block lg:hidden z-50`}
+          className={`${open ? "fixed top-5 right-0" : "relative"
+            } max-lg:block lg:hidden z-50`}
         >
           <label className="btn btn-link swap swap-rotate dark-text light-text">
             <input
@@ -82,12 +100,11 @@ const Navbar = () => {
           </label>
         </div>
       </div>
- 
+
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${
-          open ? "translate-x-0" : "translate-x-full"
-        } overflow-y-auto`}
+        className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"
+          } overflow-y-auto`}
       >
         <div className="flex justify-between">
           <ThemeSwitch />
@@ -115,5 +132,5 @@ const Navbar = () => {
     </nav>
   );
 };
- 
+
 export default Navbar;

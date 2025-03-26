@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ImCheckmark } from "react-icons/im";
+import { ImCross } from "react-icons/im";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -48,20 +49,32 @@ const Pricing = ({ title, width }) => {
 
   const planTypes = [
     {
-      name: "Basic",
+      name: "Free Account",
       priceMonthly: "FREE",
       priceYearly: "FREE",
-      description: "For individuals looking to do something.",
-      features: ["Free trial access", "Limited to...", "Limited support"],
+      description: "Limited access to pet adoption features.",
+      features: [
+        { text: "Browse pet listings", available: true },
+        { text: "See limited details of pets", available: true },
+        { text: "Message pet owner", available: false },
+        { text: "List a pet for adoption", available: false },
+        { text: "Adopt a pet", available: false },
+      ],
       isPopular: false,
       hasToggle: false,
     },
     {
-      name: "Premium",
+      name: "Premium Account",
       priceMonthly: "9.99",
       priceYearly: "99",
-      description: "For professionals that need something.",
-      features: ["Unlimited...", "Unlimited requests", "Priority support"],
+      description: "Full access to pet adoption features.",
+      features: [
+        { text: "Browse pet listings", available: true },
+        { text: "See all details of pets", available: true },
+        { text: "Can message pet owner", available: true },
+        { text: "Can adopt pet", available: true },
+        { text: "Can list pet for adoption", available: true },
+      ],
       isPopular: true,
       hasToggle: true,
     },
@@ -83,17 +96,16 @@ const Pricing = ({ title, width }) => {
           </div>
           <div className="flex">
             <div className="flex max-md:flex-col justify-center gap-20 max-md:gap-10">
-              {/* Basic Plan Card */}
+              {/* Free Account Plan */}
               {path === "/" && (
                 <div
                   className={`p-8 rounded-lg shadow-lg relative border-2 border-gray-400 ${width}`}
                 >
                   <h2 className="text-2xl font-semibold mb-4 text-success">
-                    Basic
+                    Free Account
                   </h2>
                   <p className="mb-8 light-text dark-text h-[60px]">
-                    For individuals looking to test AI capabilities with limited
-                    usage and support.
+                  {planTypes[0].description}
                   </p>
                   <div className="h-[120px]">
                     <div className="text-5xl font-bold mb-6 flex items-center justify-center">
@@ -108,16 +120,16 @@ const Pricing = ({ title, width }) => {
                   <ul className="text-left space-y-4 light-text dark-text">
                     {planTypes[0].features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-1">
-                        <span className="text-green-400">
-                          <ImCheckmark />
+                        <span className={feature.available ? "text-green-400" : "text-red-400"}>
+                    {feature.available ? <ImCheckmark /> : <ImCross />}
                         </span>
-                        {feature}
+                        {feature.text}
                       </li>
                     ))}
                   </ul>
                 </div>
               )}
-              {/* Premium Plan Card */}
+              {/* Premium Account Plan  */}
               <div
                 className={`p-8 rounded-lg shadow-lg relative border-2 border-blue-400 ${width}`}
               >
@@ -127,11 +139,10 @@ const Pricing = ({ title, width }) => {
                   </div>
                 )}
                 <h2 className="text-2xl font-semibold mb-4 text-primary">
-                  Premium
+                  Premium Account
                 </h2>
                 <p className="mb-8 light-text dark-text h-[60px]">
-                  For professionals that need unlimited AI diagnostics and
-                  enhanced support.
+                  {planTypes[1].description}
                 </p>
                 <div className="h-[120px]">
                   <div className="text-5xl font-bold mb-6 flex items-center justify-center">
@@ -192,7 +203,7 @@ const Pricing = ({ title, width }) => {
                       <span className="text-green-400">
                         <ImCheckmark />
                       </span>
-                      {feature}
+                      {feature.text}
                     </li>
                   ))}
                 </ul>
