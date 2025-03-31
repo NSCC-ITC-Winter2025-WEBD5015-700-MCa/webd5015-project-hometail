@@ -11,12 +11,12 @@ const KeyFeatures = () => {
         className="w-full flex justify-center pt-32 max-md:pt-16 light-text dark-text"
       >
         <div className="flex gap-10 items-center w-4/5 max-lg:w-full max-lg:flex-col max-lg:gap-16">
-          <div className="w-1/2 flex justify-center max-lg:w-4/5">
+          <div className="w-full max-w-[500px] aspect-[16/9]">
             <Image
               src={Keyfeature1}
-              className="rounded-lg opacity-50 w-full"
-              alt=""
-              placeholder="blur"
+              className="rounded-lg  w-full h-auto object-cover"
+              alt="Keyfeature1"
+              
             />
           </div>
           <div className="w-1/2 flex flex-col gap-8 max-lg:w-full">
@@ -32,8 +32,8 @@ const KeyFeatures = () => {
                   <FiCheckCircle size={30} color="#43b7ff" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <h3 className="leading-relaxed text-lg font-bold">AI Pet Matching</h3>
-                  <p className="leading-relaxed text-lg">Find pet-friendly rentals effortlessly with our AI-powered pet compatibility tool.</p>
+                  <h3 className="leading-relaxed text-lg font-bold">AI-Powered Pet Matching</h3>
+                  <p className="leading-relaxed text-lg">Find Our AI algorithm helps match pet-friendly homes with tenants who have pets, ensuring a perfect fit.</p>
                 </div>
               </div>
               {/* Feature 2 */}
@@ -42,8 +42,8 @@ const KeyFeatures = () => {
                   <FiCheckCircle size={30} color="#43b7ff" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <h3 className="leading-relaxed text-lg font-bold">Smart Budget Planner</h3>
-                  <p className="leading-relaxed text-lg">Get insights on affordability and plan your rent expenses with ease.</p>
+                  <h3 className="leading-relaxed text-lg font-bold">Verified & Trusted Listings</h3>
+                  <p className="leading-relaxed text-lg">All properties go through a verification process to ensure safety and authenticity for tenants.</p>
                 </div>
               </div>
               {/* Feature 3 */}
@@ -52,7 +52,7 @@ const KeyFeatures = () => {
                   <FiCheckCircle size={30} color="#43b7ff" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <h3 className="leading-relaxed text-lg font-bold">Virtual Property Tours</h3>
+                  <h3 className="leading-relaxed text-lg font-bold">Instant Virtual Tours</h3>
                   <p className="leading-relaxed text-lg">Explore properties from the comfort of your home with immersive virtual tours.</p>
                 </div>
               </div>
@@ -96,16 +96,16 @@ const KeyFeatures = () => {
               </div>
               <div className="flex flex-col gap-2">
                 <h3 className="leading-relaxed text-lg font-bold">Transparent Pricing</h3>
-                <p className="leading-relaxed text-lg"> No hidden fees—see upfront rental costs and terms clearly before committing.</p>
+                <p className="leading-relaxed text-lg"> No hidden fees,see upfront rental costs and terms clearly before committing.</p>
               </div>
             </div>
           </div>
-          <div className="w-1/2 flex justify-center max-lg:w-4/5">
+          <div className="w-full max-w-[500px] aspect-[16/9]">
             <Image
               src={Keyfeature2}
-              className="rounded-lg opacity-50 w-full"
-              alt=""
-              placeholder="blur"
+              className="rounded-lg  w-full h-auto object-cover"
+              alt="Keyfeature2"
+              
             />
           </div>
         </div>
