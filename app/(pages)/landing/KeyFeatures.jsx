@@ -32,8 +32,8 @@ const KeyFeatures = () => {
                   <FiCheckCircle size={30} color="#43b7ff" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <h3 className="leading-relaxed text-lg font-bold">AI-Powered Pet Matching</h3>
-                  <p className="leading-relaxed text-lg">Find Our AI algorithm helps match pet-friendly homes with tenants who have pets, ensuring a perfect fit.</p>
+                  <h3 className="leading-relaxed text-lg font-bold">AI Pet Matching Preferences</h3>
+                  <p className="leading-relaxed text-lg">Our AI helps match pets with adopters based on lifestyle and preferences.</p>
                 </div>
               </div>
               {/* Feature 2 */}
@@ -52,8 +52,8 @@ const KeyFeatures = () => {
                   <FiCheckCircle size={30} color="#43b7ff" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <h3 className="leading-relaxed text-lg font-bold">Instant Virtual Tours</h3>
-                  <p className="leading-relaxed text-lg">Explore properties from the comfort of your home with immersive virtual tours.</p>
+                  <h3 className="leading-relaxed text-lg font-bold">Easy Pet Search</h3>
+                  <p className="leading-relaxed text-lg">Quickly find pets based on breed, age, and location</p>
                 </div>
               </div>
             </div>
@@ -73,8 +73,8 @@ const KeyFeatures = () => {
                 <FiCheckCircle size={30} color="#43b7ff" />
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="leading-relaxed text-lg font-bold">24/7 Tenant Support</h3>
-                <p className="leading-relaxed text-lg">Get assistance anytime with our round-the-clock support for renters.</p>
+                <h3 className="leading-relaxed text-lg font-bold">Favorite Pets</h3>
+                <p className="leading-relaxed text-lg">Save pets you like and revisit them anytime.</p>
               </div>
             </div>
 
@@ -84,8 +84,8 @@ const KeyFeatures = () => {
                 <FiCheckCircle size={30} color="#43b7ff" />
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="leading-relaxed text-lg font-bold">Seamless Communication</h3>
-                <p className="leading-relaxed text-lg">Chat directly with landlords or property managers to speed up the rental process.</p>
+                <h3 className="leading-relaxed text-lg font-bold">Instant Adoption Requests</h3>
+                <p className="leading-relaxed text-lg">Instant Adoption Requests</p>
               </div>
             </div>
 
@@ -95,7 +95,7 @@ const KeyFeatures = () => {
                 <FiCheckCircle size={30} color="#43b7ff" />
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="leading-relaxed text-lg font-bold">Transparent Pricing</h3>
+                <h3 className="leading-relaxed text-lg font-bold">Simple Profile Setup</h3>
                 <p className="leading-relaxed text-lg"> No hidden fees,see upfront rental costs and terms clearly before committing.</p>
               </div>
             </div>
