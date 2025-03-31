@@ -118,24 +118,6 @@ const ListDogForm = () => {
                 >
                   <option value="">Select Breed</option>
                   {breeds.map((breed) => (
-                    <option key={breed._id} value={breed.breed}>
-                      {breed.breed}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Breed Dropdown */}
-              <div>
-                <label className="block text-gray-700 font-medium">Breed</label>
-                <select
-                  name="breed"
-                  value={dogDetails.breed}
-                  onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg"
-                >
-                  <option value="">Select Breed</option>
-                  {breeds.map((breed) => (
                     <option key={breed._id} value={breed.breed}>{breed.breed}</option>
                   ))}
                 </select>
@@ -239,6 +221,13 @@ const ListDogForm = () => {
                   className="w-full p-2 border border-gray-300 rounded-lg"
                 />
               </div>
+
+              <button
+                type="submit"
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg"
+              >
+                List Dog
+              </button>
             </form>
           </div>
         </div>
