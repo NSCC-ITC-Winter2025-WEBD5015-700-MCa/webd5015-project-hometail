@@ -22,6 +22,21 @@ model DogBreed {
   breed String?
 }
 
+model Dog {
+  id             String @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  breed          String
+  size           String
+  activityLevel  String
+  goodWithKids   Boolean
+  shedding       String
+  maintenanceCost String
+  location       String
+  image          String?
+  createdAt      DateTime @default(now())
+}
+
+
 
 
 
