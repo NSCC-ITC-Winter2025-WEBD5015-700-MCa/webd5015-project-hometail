@@ -15,7 +15,7 @@ const ListDogForm = () => {
     image: null,
   });
   const [breeds, setBreeds] = useState([]);
-  
+
   // Fetch breeds from the backend API on component mount
   useEffect(() => {
     fetch("/api/dogbreeds")
@@ -23,7 +23,7 @@ const ListDogForm = () => {
       .then((data) => setBreeds(data)) // Assuming the data is an array of breed names
       .catch((err) => console.error("Error fetching breeds:", err));
   }, []);
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDogDetails((prev) => ({
@@ -39,18 +39,58 @@ const ListDogForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Dog Listing Details:", dogDetails);
-    // Perform the action to submit dog details (e.g., send to API)
+
+    const payload = {
+      dogName: dogDetails.name,
+      dogBreed: dogDetails.breed,
+      dogSize: dogDetails.size,
+      activityLevel: dogDetails.activity,
+      kidFriendly: dogDetails.goodWithKids,
+      sheddingLevel: dogDetails.shedding,
+      costOfMaintenance: dogDetails.maintenanceCost,
+      dogLocation: dogDetails.location,
+      dogImage: dogDetails.image, // Assuming you're handling image uploads separately
+    };
+
+    try {
+      const response = await fetch("/api/listpet", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error("Failed to list dog");
+
+      const data = await response.json();
+      console.log("Success:", data);
+      alert("Dog listed successfully!");
+
+      setDogDetails({
+        name: "",
+        breed: "",
+        size: "",
+        activity: "",
+        goodWithKids: "",
+        shedding: "",
+        maintenanceCost: "",
+        location: "",
+        image: null,
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error listing dog. Please try again.");
+    }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-lg">
-        <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">List a Dog for Adoption</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-
+        <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
+          List a Dog for Adoption
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-4 text-black">
           {/* Dog's Name Input */}
           <div>
             <label className="block text-gray-700 font-medium">Name</label>
@@ -59,10 +99,10 @@ const ListDogForm = () => {
               name="name"
               value={dogDetails.name}
               onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              className="w-full p-2 border border-gray-300 rounded-lg "
             />
           </div>
-          
+
           {/* Breed Dropdown */}
           <div>
             <label className="block text-gray-700 font-medium">Breed</label>
@@ -74,7 +114,9 @@ const ListDogForm = () => {
             >
               <option value="">Select Breed</option>
               {breeds.map((breed) => (
-                <option key={breed._id} value={breed.breed}>{breed.breed}</option>
+                <option key={breed._id} value={breed.breed}>
+                  {breed.breed}
+                </option>
               ))}
             </select>
           </div>
@@ -97,7 +139,9 @@ const ListDogForm = () => {
 
           {/* Activity Level Dropdown */}
           <div>
-            <label className="block text-gray-700 font-medium">Activity Level</label>
+            <label className="block text-gray-700 font-medium">
+              Activity Level
+            </label>
             <select
               name="activity"
               value={dogDetails.activity}
@@ -113,7 +157,9 @@ const ListDogForm = () => {
 
           {/* Good with Kids Dropdown */}
           <div>
-            <label className="block text-gray-700 font-medium">Good with Kids</label>
+            <label className="block text-gray-700 font-medium">
+              Good with Kids
+            </label>
             <select
               name="goodWithKids"
               value={dogDetails.goodWithKids}
@@ -128,7 +174,9 @@ const ListDogForm = () => {
 
           {/* Shedding Dropdown */}
           <div>
-            <label className="block text-gray-700 font-medium">Shedding Level</label>
+            <label className="block text-gray-700 font-medium">
+              Shedding Level
+            </label>
             <select
               name="shedding"
               value={dogDetails.shedding}
@@ -144,7 +192,9 @@ const ListDogForm = () => {
 
           {/* Maintenance Cost Dropdown */}
           <div>
-            <label className="block text-gray-700 font-medium">Maintenance Cost</label>
+            <label className="block text-gray-700 font-medium">
+              Maintenance Cost
+            </label>
             <select
               name="maintenanceCost"
               value={dogDetails.maintenanceCost}
@@ -172,7 +222,9 @@ const ListDogForm = () => {
 
           {/* Image Upload */}
           <div>
-            <label className="block text-gray-700 font-medium">Upload Image</label>
+            <label className="block text-gray-700 font-medium">
+              Upload Image
+            </label>
             <input
               type="file"
               onChange={handleImageChange}

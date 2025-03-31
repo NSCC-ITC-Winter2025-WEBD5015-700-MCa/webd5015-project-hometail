@@ -1,11 +1,12 @@
 import Image from "next/image";
-import Navbar from "@/app/(pages)/_components/Navbar";
 import placeholder from "@/public/pet.jpg";
+import Link from "next/link";
+import button1 from "@/public/Button2.jpeg";
+import button2 from "@/public/Button1.jpeg";
 
 const Hero = () => {
   return (
     <section id="Home" className="relative w-full h-screen">
-     
       {/* Background Image */}
       <div className="w-full">
         <Image
@@ -35,20 +36,19 @@ const Hero = () => {
             href="#"
             className="flex items-center gap-x-3 bg-[#F7AFC3] hover:bg-[#F497B3] text-white font-semibold py-5 px-14 rounded-lg text-xl shadow-md transition-all"
           >
-            <img src="/Button1.jpeg" alt="Adopt" className="w-8 h-8" />
-            I want to adopt a pet
+            <Image src={button1} alt="Rehome" className="w-12 h-12" />I want to
+            adopt a pet
           </a>
 
           {/* Rehome Button */}
-          <a
-            href="#"
+          <Link
+            href="list-pet"
             className="flex items-center gap-x-3 bg-[#F7AFC3] hover:bg-[#F497B3] text-white font-semibold py-5 px-14 rounded-lg text-xl shadow-md transition-all"
           >
-            <img src="/Button2.jpeg" alt="Rehome" className="w-8 h-8" />
-            I need to list my pet
-          </a>
+            <Image src={button2} alt="Rehome" className="w-12 h-12" />I need to
+            list my pet
+          </Link>
         </div>
-
       </div>
     </section>
   );
