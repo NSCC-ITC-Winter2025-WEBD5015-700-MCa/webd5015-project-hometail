@@ -88,7 +88,7 @@ const ListDogForm = () => {
 
   return (
     <>
-      {session.user.isSubscribed ? (
+      {session?.user?.isSubscribed ? (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
           <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-lg">
             <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
