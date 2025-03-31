@@ -1,5 +1,6 @@
 import Image from "next/image";
-import placeholder from "@/public/placeholder.png";
+import Keyfeature1 from "@/public/Keyfeature1.jpg";
+import Keyfeature2 from "@/public/Keyfeature2.jpg";
 import { FiCheckCircle } from "react-icons/fi";
 
 const KeyFeatures = () => {
@@ -12,7 +13,7 @@ const KeyFeatures = () => {
         <div className="flex gap-10 items-center w-4/5 max-lg:w-full max-lg:flex-col max-lg:gap-16">
           <div className="w-1/2 flex justify-center max-lg:w-4/5">
             <Image
-              src={placeholder}
+              src={Keyfeature1}
               className="rounded-lg opacity-50 w-full"
               alt=""
               placeholder="blur"
@@ -31,8 +32,8 @@ const KeyFeatures = () => {
                   <FiCheckCircle size={30} color="#43b7ff" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <h3 className="leading-relaxed text-lg font-bold">One</h3>
-                  <p className="leading-relaxed text-lg">Description</p>
+                  <h3 className="leading-relaxed text-lg font-bold">AI Pet Matching</h3>
+                  <p className="leading-relaxed text-lg">Find pet-friendly rentals effortlessly with our AI-powered pet compatibility tool.</p>
                 </div>
               </div>
               {/* Feature 2 */}
@@ -41,8 +42,8 @@ const KeyFeatures = () => {
                   <FiCheckCircle size={30} color="#43b7ff" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <h3 className="leading-relaxed text-lg font-bold">Two</h3>
-                  <p className="leading-relaxed text-lg">Description</p>
+                  <h3 className="leading-relaxed text-lg font-bold">Smart Budget Planner</h3>
+                  <p className="leading-relaxed text-lg">Get insights on affordability and plan your rent expenses with ease.</p>
                 </div>
               </div>
               {/* Feature 3 */}
@@ -51,8 +52,8 @@ const KeyFeatures = () => {
                   <FiCheckCircle size={30} color="#43b7ff" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <h3 className="leading-relaxed text-lg font-bold">Three</h3>
-                  <p className="leading-relaxed text-lg">Description</p>
+                  <h3 className="leading-relaxed text-lg font-bold">Virtual Property Tours</h3>
+                  <p className="leading-relaxed text-lg">Explore properties from the comfort of your home with immersive virtual tours.</p>
                 </div>
               </div>
             </div>
@@ -72,8 +73,8 @@ const KeyFeatures = () => {
                 <FiCheckCircle size={30} color="#43b7ff" />
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="leading-relaxed text-lg font-bold">Four</h3>
-                <p className="leading-relaxed text-lg">Description</p>
+                <h3 className="leading-relaxed text-lg font-bold">24/7 Tenant Support</h3>
+                <p className="leading-relaxed text-lg">Get assistance anytime with our round-the-clock support for renters.</p>
               </div>
             </div>
 
@@ -83,8 +84,8 @@ const KeyFeatures = () => {
                 <FiCheckCircle size={30} color="#43b7ff" />
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="leading-relaxed text-lg font-bold">Five</h3>
-                <p className="leading-relaxed text-lg">Description</p>
+                <h3 className="leading-relaxed text-lg font-bold">Seamless Communication</h3>
+                <p className="leading-relaxed text-lg">Chat directly with landlords or property managers to speed up the rental process.</p>
               </div>
             </div>
 
@@ -94,14 +95,14 @@ const KeyFeatures = () => {
                 <FiCheckCircle size={30} color="#43b7ff" />
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="leading-relaxed text-lg font-bold">Six</h3>
-                <p className="leading-relaxed text-lg">Description</p>
+                <h3 className="leading-relaxed text-lg font-bold">Transparent Pricing</h3>
+                <p className="leading-relaxed text-lg"> No hidden fees—see upfront rental costs and terms clearly before committing.</p>
               </div>
             </div>
           </div>
           <div className="w-1/2 flex justify-center max-lg:w-4/5">
             <Image
-              src={placeholder}
+              src={Keyfeature2}
               className="rounded-lg opacity-50 w-full"
               alt=""
               placeholder="blur"
