@@ -18,10 +18,9 @@ const Navbar = () => {
     return <loader />;
   }
 
-
   return (
     <nav
-      className={`relative shadow-2xs z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 light-text dark-text text-lg font-semibold`}
+      className={`relative text-black shadow-2xs z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 light-text dark-text text-lg font-semibold`}
     >
       <div className="flex w-full justify-between items-center">
         <Link
@@ -47,21 +46,27 @@ const Navbar = () => {
           <Link href="#Faqs" className="link link-hover dark:text-white">
             FAQs
           </Link>
-          {session &&
+          {session && (
             <Link href="/dashboard" className="link link-hover dark:text-white">
               Dashboard
-            </Link>}
-
+            </Link>
+          )}
         </div>
         <div className="flex gap-6 items-center max-lg:hidden">
-          {session ? <Link href="#" onClick={() => signOut({ redirect: true, callbackUrl: '/' })}>
-            {session.user?.email} <button
-              type="button"
-              className="btn btn-primary text-base max-lg:hidden"
-            >
-              Logout
-            </button>
-          </Link> :
+          {session ? (
+            <div className="flex gap-6 items-center">
+              <span className="text-black dark:text-white">
+                {session.user?.email}
+              </span>
+              <button
+                type="button"
+                className="btn btn-primary text-base max-lg:hidden"
+                onClick={() => signOut({ redirect: true, callbackUrl: "/" })}
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
             <Link href="/login">
               <button
                 type="button"
@@ -69,14 +74,16 @@ const Navbar = () => {
               >
                 Login/ Register
               </button>
-            </Link>}
+            </Link>
+          )}
           <ThemeSwitch />
         </div>
 
         {/* Mobile Hamburger Button */}
         <div
-          className={`${open ? "fixed top-5 right-0" : "relative"
-            } max-lg:block lg:hidden z-50`}
+          className={`${
+            open ? "fixed top-5 right-0" : "relative"
+          } max-lg:block lg:hidden z-50`}
         >
           <label className="btn btn-link swap swap-rotate dark-text light-text">
             <input
@@ -108,8 +115,9 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"
-          } overflow-y-auto`}
+        className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${
+          open ? "translate-x-0" : "translate-x-full"
+        } overflow-y-auto`}
       >
         <div className="flex justify-between">
           <ThemeSwitch />
@@ -120,16 +128,28 @@ const Navbar = () => {
               Login/ Register
             </button>
           </Link>
-          <Link href="#About" className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500">
+          <Link
+            href="#About"
+            className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500"
+          >
             About Us
           </Link>
-          <Link href="#FindPet" className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500">
+          <Link
+            href="#FindPet"
+            className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500"
+          >
             Find a pet
           </Link>
-          <Link href="#ListPet" className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500">
+          <Link
+            href="#ListPet"
+            className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500"
+          >
             List a pet
           </Link>
-          <Link href="#Faqs" className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500">
+          <Link
+            href="#Faqs"
+            className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500"
+          >
             FAQs
           </Link>
         </div>

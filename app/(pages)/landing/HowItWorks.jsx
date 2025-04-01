@@ -2,7 +2,7 @@ const HowItWorks = () => {
   return (
     <section
       id="Values"
-      className="w-full flex justify-center pt-32 max-md:pt-16"
+      className="w-full flex justify-center pt-32 max-md:pt-16 text-black dark:text-white"
     >
       <div className="flex flex-col w-full max-lg:w-4/5">
         <div className="items-center flex flex-col gap-10">
@@ -15,7 +15,7 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        <div className="w-full flex text-center gap-16 pt-14 max-sm:flex-col max-sm:items-center">
+        <div className="w-full flex text-center gap-16 pt-14 max-sm:flex-col max-sm:items-center text-black">
           {/* Card 1 */}
           <div className="flex flex-col gap-5 items-center w-1/3 max-md:w-full bg-white shadow-md rounded-lg p-6">
             <img

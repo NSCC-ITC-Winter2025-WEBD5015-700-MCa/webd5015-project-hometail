@@ -7,21 +7,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-// export const plans = [
-//   {
-//     link: "https://buy.stripe.com/cN26qR16F2UUe1G7sv",
-//     priceId: "price_1Q8UhYHbTfdUSDfilKK7lqyt",
-//     price: 4.99,
-//     duration: "/month",
-//   },
-//   {
-//     link: "https://buy.stripe.com/6oEbLb4iRanm2iY148",
-//     priceId: "price_1Q8Ul0HbTfdUSDfisT1dNt3Z",
-//     price: 44.99,
-//     duration: "/year",
-//   },
-// ];
-
 export const plansTest = [
   {
     link: "https://buy.stripe.com/test_eVa4i92i8dKW8Ss28c",
@@ -84,7 +69,7 @@ const Pricing = ({ title, width }) => {
     <>
       <section
         id="Pricing"
-        className={`w-full flex justify-center light-text dark-text ${
+        className={`w-full flex justify-center text-black dark:text-white ${
           path === "/subscribe" ? "pb-14" : "pb-32"
         }`}
       >

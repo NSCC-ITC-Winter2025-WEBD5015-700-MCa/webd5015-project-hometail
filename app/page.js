@@ -12,7 +12,7 @@ export default function Home() {
         <HowItWorks />
         <KeyFeatures />
         <FAQ />
-        <Pricing title={"Subscription"} width={"w-[350px]"} />
+        <Pricing title={"Pricing"} width={"w-[350px]"} />
       </div>
     </>
   );
