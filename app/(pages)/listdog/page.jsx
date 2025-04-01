@@ -30,7 +30,7 @@ const ListDogForm = () => {
     const { name, value } = e.target;
     setDogDetails((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: name === "goodWithKids" ? value === "true" : value, // Convert string to boolean for 'goodWithKids'
     }));
   };
 
@@ -123,6 +123,24 @@ const ListDogForm = () => {
                 </select>
               </div>
 
+              {/* Dog's Size Dropdown */}
+              <div>
+                <label className="block text-gray-700 font-medium">
+                  Size
+                </label>
+                <select
+                  name="size"
+                  value={dogDetails.size}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded-lg"
+                >
+                  <option value="">Select Size</option>
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
+                </select>
+              </div>
+
               {/* Activity Level Dropdown */}
               <div>
                 <label className="block text-gray-700 font-medium">
@@ -194,20 +212,16 @@ const ListDogForm = () => {
                 </select>
               </div>
 
-              {/* Maintenance Cost Dropdown */}
+              {/* Dog's Location */}
               <div>
-                <label className="block text-gray-700 font-medium">Maintenance Cost</label>
-                <select
-                  name="maintenanceCost"
-                  value={dogDetails.maintenanceCost}
+                <label className="block text-gray-700 font-medium">Location</label>
+                <input
+                  type="text"
+                  name="location"
+                  value={dogDetails.location}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg"
-                >
-                  <option value="">Select Maintenance Cost</option>
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                </select>
+                  className="w-full p-2 border border-gray-300 rounded-lg "
+                />
               </div>
 
               {/* Image Upload */}
