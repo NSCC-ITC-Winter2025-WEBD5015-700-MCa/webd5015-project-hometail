@@ -1,8 +1,6 @@
 import Together from "together-ai";
 
 // Load environment variables from .env file
-//dotenv.config({ path: "./.env" });
-
 const together = new Together({ apiKey: process.env.TOGETHER_AI_API_KEY });
 
 // Mock dataset of adoptable dogs
@@ -14,6 +12,7 @@ const dogs = [
   { name: "Rocky", breed: "Golden Retriever", size: "large", activity: "high", goodWithKids: true, temperament: "gentle", shedding: "high", maintenanceCost: "medium" },
   { name: "Daisy", breed: "Chihuahua", size: "small", activity: "low", goodWithKids: false, temperament: "playful", shedding: "low", maintenanceCost: "low" },
 ];
+let savedPreferences;
 
 // Function to find compatible dogs based on user preferences
 function findMatches(preferences) {
@@ -34,6 +33,7 @@ function findMatches(preferences) {
         (preferences.activity ? dog.activity === preferences.activity : true)
     );
   }
+  savedPreferences = preferences;
 
   return matches;
 }
@@ -44,13 +44,15 @@ async function refineMatchesWithAI(matchNames, matchBreeds) {
     messages: [
       {
         role: "user",
-        content: `I am looking to adopt a dog. Based on the dataset, the best matches for me are: ${matchNames}. Their breeds are ${matchBreeds} respectively. Can you describe their personalities and why they might be a good fit for my home?`,
+        content: `I am looking to adopt a dog. Based on the dataset, the best matches for me are: ${matchNames}. Their breeds are ${matchBreeds} respectively. 
+        Can you describe their personalities and why they might be a good fit for my home? My preferences are activity level: ${savedPreferences.activity},
+       good with kids: ${savedPreferences.goodWithKids}
+       shedding: ${savedPreferences.shedding},
+       maintenance cost: ${savedPreferences.maintenanceCost}. Which is the bes option? `,
       },
     ],
     model: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
   });
-  console.log("KKKK",matchNames)
-  console.log("KKKK",matchBreeds)
 
   return response.choices[0].message.content;
 }
