@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const { data: session, status } = useSession();
 
-  if(status === "loading") {
+  if (status === "loading") {
     return <loader />;
   }
 
@@ -47,9 +47,14 @@ const Navbar = () => {
           <Link href="#Faqs" className="link link-hover dark:text-white">
             FAQs
           </Link>
+          {session &&
+            <Link href="/dashboard" className="link link-hover dark:text-white">
+              Dashboard
+            </Link>}
+
         </div>
         <div className="flex gap-6 items-center max-lg:hidden">
-          {session ? <Link href="#" onClick={()=>signOut({ redirect: true, callbackUrl: '/'})}>
+          {session ? <Link href="#" onClick={() => signOut({ redirect: true, callbackUrl: '/' })}>
             {session.user?.email} <button
               type="button"
               className="btn btn-primary text-base max-lg:hidden"
