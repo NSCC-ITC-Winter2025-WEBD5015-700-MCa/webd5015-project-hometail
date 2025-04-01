@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import Subscribe from "../subscribe/page";
+import Link from "next/link";
 
 const ListDogForm = () => {
   const [dogDetails, setDogDetails] = useState({
@@ -88,7 +88,7 @@ const ListDogForm = () => {
 
   return (
     <>
-      {session.user.isSubscribed ? (
+      {session?.user?.isSubscribed ? (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
           <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-lg">
             <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
@@ -136,7 +136,9 @@ const ListDogForm = () => {
                 >
                   <option value="">Select Breed</option>
                   {breeds.map((breed) => (
-                    <option key={breed._id} value={breed.breed}>{breed.breed}</option>
+                    <option key={breed._id} value={breed.breed}>
+                      {breed.breed}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -214,7 +216,9 @@ const ListDogForm = () => {
 
               {/* Maintenance Cost Dropdown */}
               <div>
-                <label className="block text-gray-700 font-medium">Maintenance Cost</label>
+                <label className="block text-gray-700 font-medium">
+                  Maintenance Cost
+                </label>
                 <select
                   name="maintenanceCost"
                   value={dogDetails.maintenanceCost}
@@ -239,13 +243,28 @@ const ListDogForm = () => {
                   className="w-full p-2 border border-gray-300 rounded-lg"
                 />
               </div>
+              {/* submit button */}
+              <div className="flex justify-center mt-4">
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+                >
+                  List Dog
+                </button>
+              </div>
             </form>
           </div>
         </div>
-      ) : (<Subscribe />)}
-
+      ) : (
+        <h1 className="flex justify-center pt-5 min-h-screen">
+          This is a paid feature.&nbsp;
+          <Link href="/subscribe" className="text-blue-500">
+            Click here&nbsp;
+          </Link>
+          to subscribe!
+        </h1>
+      )}
     </>
-
   );
 };
 export default ListDogForm;

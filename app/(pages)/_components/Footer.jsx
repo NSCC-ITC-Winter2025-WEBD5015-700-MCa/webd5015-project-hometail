@@ -12,14 +12,17 @@ const Footer = () => {
             <Link href="/tos" className="link link-hover dark:text-white">
               Terms of Service
             </Link>
-            <Link href="/privacy-policy" className="link link-hover dark:text-white">
+            <Link
+              href="/privacy-policy"
+              className="link link-hover dark:text-white"
+            >
               Privacy Policy
             </Link>
           </nav>
           <aside>
             <p>
               Copyright © {new Date().getFullYear()} - All rights reserved by
-              APP_NAME
+              HomeTail
             </p>
           </aside>
         </footer>
