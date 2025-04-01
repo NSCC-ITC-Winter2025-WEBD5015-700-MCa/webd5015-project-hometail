@@ -1,12 +1,11 @@
-// api/match/dogMatch.js
-import dotenv from "dotenv";
 import Together from "together-ai";
 
-dotenv.config({ path: "./.env" });
+// Load environment variables from .env file
+//dotenv.config({ path: "./.env" });
 
-const together = new Together({ apiKey: process.env.API_KEY });
+const together = new Together({ apiKey: process.env.TOGETHER_AI_API_KEY });
 
-// Mock dataset of adoptable dogs - This dataset will be fetched from the database
+// Mock dataset of adoptable dogs
 const dogs = [
   { name: "Buddy", breed: "Labrador Retriever", size: "large", activity: "high", goodWithKids: true, temperament: "friendly", shedding: "high", maintenanceCost: "medium" },
   { name: "Max", breed: "Bulldog", size: "medium", activity: "low", goodWithKids: true, temperament: "calm", shedding: "low", maintenanceCost: "high" },
@@ -17,7 +16,7 @@ const dogs = [
 ];
 
 // Function to find compatible dogs based on user preferences
-export function findMatches(preferences) {
+function findMatches(preferences) {
   let matches = dogs.filter(
     (dog) =>
       (preferences.size ? dog.size === preferences.size : true) &&
@@ -39,17 +38,37 @@ export function findMatches(preferences) {
   return matches;
 }
 
-// Function to refine matches using Together AI (You can call this when necessary)
-export async function refineMatchesWithAI(matchNames) {
+// Function to refine matches using Together AI
+async function refineMatchesWithAI(matchNames, matchBreeds) {
   const response = await together.chat.completions.create({
     messages: [
       {
         role: "user",
-        content: `I am looking to adopt a dog. Based on the dataset, the best matches for me are: ${matchNames}. Can you describe their personalities and why they might be a good fit for my home?`,
+        content: `I am looking to adopt a dog. Based on the dataset, the best matches for me are: ${matchNames}. Their breeds are ${matchBreeds} respectively. Can you describe their personalities and why they might be a good fit for my home?`,
       },
     ],
     model: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
   });
+  console.log("KKKK",matchNames)
+  console.log("KKKK",matchBreeds)
 
   return response.choices[0].message.content;
+}
+
+// API route handler for POST request
+export async function POST(req) {
+  const preferences = await req.json();
+
+  // Find initial dog matches based on preferences
+  const matches = findMatches(preferences);
+
+  // If matches are found, refine them using AI
+  if (matches.length > 0) {
+    const matchNames = matches.map(dog => dog.name).join(", ");
+    const matchBreeds = matches.map(dog => dog.breed).join(", ");
+    const aiResponse = await refineMatchesWithAI(matchNames, matchBreeds);
+    return new Response(JSON.stringify({ matches, aiDescription: aiResponse }), { status: 200 });
+  } else {
+    return new Response(JSON.stringify({ matches: [], aiDescription: "No exact matches found." }), { status: 200 });
+  }
 }
