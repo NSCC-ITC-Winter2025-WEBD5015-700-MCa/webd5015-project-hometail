@@ -27,14 +27,14 @@ model Dog {
   name           String
   breed          String
   size           String
-  activityLevel  String
+  activityLevel  String?
   goodWithKids   Boolean
-  temperament    String
+  temperament    String?
   shedding       String
   maintenanceCost String
-  location       String
+  location       String?
   image          String?
-  createdAt      DateTime @default(now())
+  createdAt      DateTime? @default(now())
 }
 
 
