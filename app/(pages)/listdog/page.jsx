@@ -30,7 +30,7 @@ const ListDogForm = () => {
     const { name, value } = e.target;
     setDogDetails((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: name === "goodWithKids" ? value === "true" : value, // Convert string to boolean for 'goodWithKids'
     }));
   };
 
@@ -50,6 +50,7 @@ const ListDogForm = () => {
       dogSize: dogDetails.size,
       activityLevel: dogDetails.activity,
       kidFriendly: dogDetails.goodWithKids,
+      temperament: dogDetails.temperament,
       sheddingLevel: dogDetails.shedding,
       costOfMaintenance: dogDetails.maintenanceCost,
       dogLocation: dogDetails.location,
@@ -75,6 +76,7 @@ const ListDogForm = () => {
         size: "",
         activity: "",
         goodWithKids: "",
+        temperament: "",
         shedding: "",
         maintenanceCost: "",
         location: "",
@@ -88,7 +90,7 @@ const ListDogForm = () => {
 
   return (
     <>
-      {session.user.isSubscribed ? (
+      {session?.user?.isSubscribed ? (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
           <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-lg">
             <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
@@ -118,26 +120,26 @@ const ListDogForm = () => {
                 >
                   <option value="">Select Breed</option>
                   {breeds.map((breed) => (
-                    <option key={breed._id} value={breed.breed}>
-                      {breed.breed}
-                    </option>
+                    <option key={breed._id} value={breed.breed}>{breed.breed}</option>
                   ))}
                 </select>
               </div>
 
-              {/* Breed Dropdown */}
+              {/* Dog's Size Dropdown */}
               <div>
-                <label className="block text-gray-700 font-medium">Breed</label>
+                <label className="block text-gray-700 font-medium">
+                  Size
+                </label>
                 <select
-                  name="breed"
-                  value={dogDetails.breed}
+                  name="size"
+                  value={dogDetails.size}
                   onChange={handleChange}
                   className="w-full p-2 border border-gray-300 rounded-lg"
                 >
-                  <option value="">Select Breed</option>
-                  {breeds.map((breed) => (
-                    <option key={breed._id} value={breed.breed}>{breed.breed}</option>
-                  ))}
+                  <option value="">Select Size</option>
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
                 </select>
               </div>
 
@@ -173,6 +175,27 @@ const ListDogForm = () => {
                   <option value="">Select</option>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
+                </select>
+              </div>
+
+              {/* Temperament Dropdown */}
+              <div>
+                <label className="block text-gray-700 font-medium">
+                  Temperament
+                </label>
+                <select
+                  name="temperament"
+                  value={dogDetails.temperament}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded-lg"
+                >
+                  <option value="">Select Temperament</option>
+                  <option value="calm">Calm</option>
+                  <option value="curious">Curious</option>
+                  <option value="friendly">Friendly</option>
+                  <option value="gentle">Gentle</option>
+                  <option value="playful">Playful</option>
+                  <option value="protective">Protective</option>
                 </select>
               </div>
 
@@ -212,20 +235,16 @@ const ListDogForm = () => {
                 </select>
               </div>
 
-              {/* Maintenance Cost Dropdown */}
+              {/* Dog's Location */}
               <div>
-                <label className="block text-gray-700 font-medium">Maintenance Cost</label>
-                <select
-                  name="maintenanceCost"
-                  value={dogDetails.maintenanceCost}
+                <label className="block text-gray-700 font-medium">Location</label>
+                <input
+                  type="text"
+                  name="location"
+                  value={dogDetails.location}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg"
-                >
-                  <option value="">Select Maintenance Cost</option>
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                </select>
+                  className="w-full p-2 border border-gray-300 rounded-lg "
+                />
               </div>
 
               {/* Image Upload */}
@@ -239,6 +258,13 @@ const ListDogForm = () => {
                   className="w-full p-2 border border-gray-300 rounded-lg"
                 />
               </div>
+
+              <button
+                type="submit"
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg"
+              >
+                List Dog
+              </button>
             </form>
           </div>
         </div>

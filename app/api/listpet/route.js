@@ -7,17 +7,21 @@ export const POST = async (req) => {
   try {
     const body = await req.json();
 
+    // Log body for debugging
+    console.log("Body received:", body);
+
     const newDog = await prisma.dog.create({
       data: {
-        name: body.dogName,
+        name: body.dogName,  // Ensure correct field name
         breed: body.dogBreed,
         size: body.dogSize,
         activityLevel: body.activityLevel,
-        goodWithKids: body.kidFriendly === "true", // Ensure boolean conversion
+        goodWithKids: body.kidFriendly,  // Should be a boolean (no need for conversion)
+        temperament: body.temperament,
         shedding: body.sheddingLevel,
         maintenanceCost: body.costOfMaintenance,
         location: body.dogLocation,
-        image: body.dogImage, // Assuming you're storing image URLs
+        image: body.dogImage || null,  // Default to empty string if image is null
       },
     });
 
