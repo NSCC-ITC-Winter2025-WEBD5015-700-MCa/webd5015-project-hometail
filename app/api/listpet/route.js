@@ -17,6 +17,7 @@ export const POST = async (req) => {
         size: body.dogSize,
         activityLevel: body.activityLevel,
         goodWithKids: body.kidFriendly,  // Should be a boolean (no need for conversion)
+        temperament: body.temperament,
         shedding: body.sheddingLevel,
         maintenanceCost: body.costOfMaintenance,
         location: body.dogLocation,

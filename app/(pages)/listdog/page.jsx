@@ -50,6 +50,7 @@ const ListDogForm = () => {
       dogSize: dogDetails.size,
       activityLevel: dogDetails.activity,
       kidFriendly: dogDetails.goodWithKids,
+      temperament: dogDetails.temperament,
       sheddingLevel: dogDetails.shedding,
       costOfMaintenance: dogDetails.maintenanceCost,
       dogLocation: dogDetails.location,
@@ -75,6 +76,7 @@ const ListDogForm = () => {
         size: "",
         activity: "",
         goodWithKids: "",
+        temperament: "",
         shedding: "",
         maintenanceCost: "",
         location: "",
@@ -173,6 +175,27 @@ const ListDogForm = () => {
                   <option value="">Select</option>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
+                </select>
+              </div>
+
+              {/* Temperament Dropdown */}
+              <div>
+                <label className="block text-gray-700 font-medium">
+                  Temperament
+                </label>
+                <select
+                  name="temperament"
+                  value={dogDetails.temperament}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded-lg"
+                >
+                  <option value="">Select Temperament</option>
+                  <option value="calm">Calm</option>
+                  <option value="curious">Curious</option>
+                  <option value="friendly">Friendly</option>
+                  <option value="gentle">Gentle</option>
+                  <option value="playful">Playful</option>
+                  <option value="protective">Protective</option>
                 </select>
               </div>
 

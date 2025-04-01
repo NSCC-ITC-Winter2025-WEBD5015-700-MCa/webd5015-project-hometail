@@ -29,6 +29,7 @@ model Dog {
   size           String
   activityLevel  String
   goodWithKids   Boolean
+  temperament    String
   shedding       String
   maintenanceCost String
   location       String
