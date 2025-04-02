@@ -3,25 +3,21 @@
 import ThemeSwitch from "./ThemeSwitch";
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { FaPaw } from "react-icons/fa";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-
   const { data: session, status } = useSession();
-
   const path = usePathname();
 
   if (status === "loading") {
-    return <loader />;
+    return <div>Loading...</div>;
   }
 
-
   return (
-    <nav
-      className={`relative text-black shadow-2xs z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 text-lg font-semibold`}
-    >
+    <nav className="relative text-black shadow-2xs z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 text-lg font-semibold">
       <div className="flex w-full justify-between items-center">
         <Link
           href="/"
@@ -31,15 +27,14 @@ const Navbar = () => {
           HomeTail
         </Link>
 
-        {/* Desktop Navigation */}
-
-          {session && (
-            <Link href="/dashboard" className="link link-hover dark:text-white">
-              Dashboard
-
-        {!["/dashboard","/adoptdog","/listdog","/mysubscriptions"].includes(path) ? (
+        {!["/dashboard", "/adoptdog", "/listdog", "/mysubscriptions"].includes(
+          path
+        ) && (
           <div className="flex gap-16 items-center max-lg:hidden">
-            <Link href="/#HowItWorks" className="link link-hover dark:text-white">
+            <Link
+              href="/#HowItWorks"
+              className="link link-hover dark:text-white"
+            >
               About Us
             </Link>
             <Link href="/adoptdog" className="link link-hover dark:text-white">
@@ -52,12 +47,16 @@ const Navbar = () => {
               FAQs
             </Link>
             {session && (
-              <Link href="/dashboard" className="link link-hover dark:text-white">
+              <Link
+                href="/dashboard"
+                className="link link-hover dark:text-white"
+              >
                 Dashboard
               </Link>
             )}
           </div>
-        ) : null}
+        )}
+
         <div className="flex gap-6 items-center max-lg:hidden">
           {session ? (
             <div className="flex gap-6 items-center">
@@ -85,10 +84,10 @@ const Navbar = () => {
           <ThemeSwitch />
         </div>
 
-        {/* Mobile Hamburger Button */}
         <div
-          className={`${open ? "fixed top-5 right-0" : "relative"
-            } max-lg:block lg:hidden z-50`}
+          className={`max-lg:block lg:hidden z-50 ${
+            open ? "fixed top-5 right-0" : "relative"
+          }`}
         >
           <label className="btn btn-link swap swap-rotate dark-text light-text">
             <input
@@ -118,10 +117,10 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div
-        className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"
-          } overflow-y-auto`}
+        className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${
+          open ? "translate-x-0" : "translate-x-full"
+        } overflow-y-auto`}
       >
         <div className="flex justify-between">
           <ThemeSwitch />
@@ -133,25 +132,25 @@ const Navbar = () => {
             </button>
           </Link>
           <Link
-            href="#About"
+            href="/#HowItWorks"
             className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500"
           >
             About Us
           </Link>
           <Link
-            href="#FindPet"
+            href="/adoptdog"
             className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500"
           >
             Find a pet
           </Link>
           <Link
-            href="#ListPet"
+            href="/listdog"
             className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500"
           >
             List a pet
           </Link>
           <Link
-            href="#Faqs"
+            href="/#FAQ"
             className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500"
           >
             FAQs
