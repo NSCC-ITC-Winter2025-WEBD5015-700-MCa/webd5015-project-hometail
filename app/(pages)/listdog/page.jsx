@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Subscribe from "../subscribe/page";
+import Navbar from "../_components/Navbar";
+import Footer from "../_components/Footer";
 
 const ListDogForm = () => {
   const [dogDetails, setDogDetails] = useState({
@@ -269,9 +271,7 @@ const ListDogForm = () => {
           </div>
         </div>
       ) : (<Subscribe />)}
-
     </>
-
   );
 };
 export default ListDogForm;
