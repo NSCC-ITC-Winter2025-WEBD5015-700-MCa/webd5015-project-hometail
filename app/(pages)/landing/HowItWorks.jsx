@@ -1,7 +1,7 @@
 const HowItWorks = () => {
   return (
     <section
-      id="Values"
+      id="HowItWorks"
       className="w-full flex justify-center pt-32 max-md:pt-16 text-black dark:text-white"
     >
       <div className="flex flex-col w-full max-lg:w-4/5">

@@ -33,18 +33,22 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
 
+          {session && (
+            <Link href="/dashboard" className="link link-hover dark:text-white">
+              Dashboard
+
         {!["/dashboard","/adoptdog","/listdog","/mysubscriptions"].includes(path) ? (
           <div className="flex gap-16 items-center max-lg:hidden">
-            <Link href="#About" className="link link-hover dark:text-white">
+            <Link href="/#HowItWorks" className="link link-hover dark:text-white">
               About Us
             </Link>
-            <Link href="#FindPet" className="link link-hover dark:text-white">
+            <Link href="/adoptdog" className="link link-hover dark:text-white">
               Find a pet
             </Link>
-            <Link href="#ListPet" className="link link-hover dark:text-white">
+            <Link href="/listdog" className="link link-hover dark:text-white">
               List a pet
             </Link>
-            <Link href="#Faqs" className="link link-hover dark:text-white">
+            <Link href="/#FAQ" className="link link-hover dark:text-white">
               FAQs
             </Link>
             {session && (
