@@ -9,20 +9,11 @@ import { Loader } from "@/utils/loader";
 const OAuthButtons = () => {
   const [loading, setLoading] = useState({
     isGoogleLoading: false,
-    isAppleLoading: false,
   });
 
   const handleGoogleSignIn = () => {
-    setLoading({ isGoogleLoading: true, isAppleLoading: false });
-    setTimeout(
-      () => signIn("google", { redirectTo: "/dashboard" }),
-      2000
-    );
-  };
-
-  const handleAppleSignIn = () => {
-    setLoading({ isGoogleLoading: false, isAppleLoading: true });
-    setTimeout(() => signIn("apple", { redirectTo: "/dashboard" }), 2000);
+    setLoading({ isGoogleLoading: true });
+    setTimeout(() => signIn("google", { redirectTo: "/dashboard" }), 2000);
   };
 
   return (
@@ -37,19 +28,6 @@ const OAuthButtons = () => {
         ) : (
           <>
             <FcGoogle size={30} /> Continue with Google
-          </>
-        )}
-      </button>
-      <button
-        disabled={loading.isGoogleLoading}
-        className="btn btn-neutral w-full text-base dark:text-white text-black mt-4"
-        onClick={handleAppleSignIn}
-      >
-        {loading.isAppleLoading ? (
-          <Loader />
-        ) : (
-          <>
-            <FaApple size={30} /> Continue with Apple
           </>
         )}
       </button>
