@@ -14,9 +14,12 @@ const Navbar = () => {
 
   const { data: session, status } = useSession();
 
+  const path = usePathname();
+
   if (status === "loading") {
     return <loader />;
   }
+
 
   return (
     <nav
@@ -33,25 +36,27 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
 
-        <div className="flex gap-16 items-center max-lg:hidden">
-          <Link href="#About" className="link link-hover dark:text-white">
-            About Us
-          </Link>
-          <Link href="#FindPet" className="link link-hover dark:text-white">
-            Find a pet
-          </Link>
-          <Link href="#ListPet" className="link link-hover dark:text-white">
-            List a pet
-          </Link>
-          <Link href="#Faqs" className="link link-hover dark:text-white">
-            FAQs
-          </Link>
-          {session && (
-            <Link href="/dashboard" className="link link-hover dark:text-white">
-              Dashboard
+        {!["/dashboard","/adoptdog","/listdog","/mysubscriptions"].includes(path) ? (
+          <div className="flex gap-16 items-center max-lg:hidden">
+            <Link href="#About" className="link link-hover dark:text-white">
+              About Us
             </Link>
-          )}
-        </div>
+            <Link href="#FindPet" className="link link-hover dark:text-white">
+              Find a pet
+            </Link>
+            <Link href="#ListPet" className="link link-hover dark:text-white">
+              List a pet
+            </Link>
+            <Link href="#Faqs" className="link link-hover dark:text-white">
+              FAQs
+            </Link>
+            {session && (
+              <Link href="/dashboard" className="link link-hover dark:text-white">
+                Dashboard
+              </Link>
+            )}
+          </div>
+        ) : null}
         <div className="flex gap-6 items-center max-lg:hidden">
           {session ? (
             <div className="flex gap-6 items-center">
@@ -81,9 +86,8 @@ const Navbar = () => {
 
         {/* Mobile Hamburger Button */}
         <div
-          className={`${
-            open ? "fixed top-5 right-0" : "relative"
-          } max-lg:block lg:hidden z-50`}
+          className={`${open ? "fixed top-5 right-0" : "relative"
+            } max-lg:block lg:hidden z-50`}
         >
           <label className="btn btn-link swap swap-rotate dark-text light-text">
             <input
@@ -115,9 +119,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${
-          open ? "translate-x-0" : "translate-x-full"
-        } overflow-y-auto`}
+        className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"
+          } overflow-y-auto`}
       >
         <div className="flex justify-between">
           <ThemeSwitch />
