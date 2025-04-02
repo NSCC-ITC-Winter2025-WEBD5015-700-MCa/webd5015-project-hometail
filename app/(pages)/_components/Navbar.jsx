@@ -1,13 +1,10 @@
 "use client";
 
 import ThemeSwitch from "./ThemeSwitch";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-
 import { signOut, useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
 import { FaPaw } from "react-icons/fa";
-import { Loader } from "@/utils/loader";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -20,12 +17,12 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`relative text-black shadow-2xs z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 light-text dark-text text-lg font-semibold`}
+      className={`relative text-black shadow-2xs z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 text-lg font-semibold`}
     >
       <div className="flex w-full justify-between items-center">
         <Link
           href="/"
-          className="flex items-center font-semibold light-text dark-text text-2xl dark:text-white"
+          className="flex items-center font-semibold text-2xl dark:text-white"
         >
           <FaPaw className="text-3xl mr-2 text-blue-500" />
           HomeTail
