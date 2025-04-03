@@ -21,7 +21,7 @@ model Dog {
   location       String?
   image          String?
   createdAt      DateTime? @default(now())
-  userId         String
+  userId         String? @db.ObjectId
 }
 
 model User {
