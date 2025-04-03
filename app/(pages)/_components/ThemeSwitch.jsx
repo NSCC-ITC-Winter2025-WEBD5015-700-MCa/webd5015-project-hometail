@@ -21,8 +21,8 @@ export default function ThemeSwitch() {
         onChange={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
         checked={resolvedTheme === "light"} // Make sure the checkbox reflects the current theme
       />
-      <CiDark className="fill-current swap-off text-gray-600" size={30} />
-      <CiLight className="fill-current swap-on text-gray-600" size={30} />
+      <CiDark className="fill-current swap-off dark:text-white" size={30} />
+      <CiLight className="fill-current swap-on text-black" size={30} />
     </label>
   );
 }

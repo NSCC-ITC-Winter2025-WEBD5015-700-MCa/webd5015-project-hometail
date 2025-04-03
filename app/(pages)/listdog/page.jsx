@@ -12,6 +12,7 @@ const ListDogForm = () => {
     breed: "",
     size: "",
     activity: "",
+    temperament: "",
     goodWithKids: "",
     shedding: "",
     maintenanceCost: "",
@@ -37,31 +38,34 @@ const ListDogForm = () => {
   };
 
   const handleImageChange = (e) => {
-    setDogDetails((prev) => ({
-      ...prev,
-      image: e.target.files[0],
-    }));
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setDogDetails((prev) => ({
+        ...prev,
+        image: reader.result,
+      }));
+    };
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
-      dogName: dogDetails.name,
-      dogBreed: dogDetails.breed,
-      dogSize: dogDetails.size,
+      name: dogDetails.name,
+      breed: dogDetails.breed,
+      size: dogDetails.size,
       activityLevel: dogDetails.activity,
-      kidFriendly: dogDetails.goodWithKids,
+      goodWithKids: dogDetails.goodWithKids,
       temperament: dogDetails.temperament,
-      sheddingLevel: dogDetails.shedding,
-      costOfMaintenance: dogDetails.maintenanceCost,
-      dogLocation: dogDetails.location,
-      dogImage: dogDetails.image, // Assuming you're handling image uploads separately
-      User: {
-        connect: {
-          id: session?.user?.id, // Ensure the user ID is correctly passed
-        },
-      },
+      shedding: dogDetails.shedding,
+      maintenanceCost: dogDetails.maintenanceCost,
+      location: dogDetails.location,
+      image: dogDetails.image,
+      userId: session?.user?.id,
     };
 
     try {
@@ -73,8 +77,6 @@ const ListDogForm = () => {
 
       if (!response.ok) throw new Error("Failed to list dog");
 
-      const data = await response.json();
-      console.log("Success:", data);
       alert("Dog listed successfully!");
 
       setDogDetails({

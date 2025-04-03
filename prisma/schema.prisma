@@ -21,7 +21,9 @@ model Dog {
   location       String?
   image          String?
   createdAt      DateTime? @default(now())
-=======
+  userId         String
+}
+
 model User {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   name String?
@@ -30,7 +32,6 @@ model User {
   isSubscribed Boolean @default(false)
   customerId String? @unique
   priceId String?
-
 }
 
 model DogBreed {
