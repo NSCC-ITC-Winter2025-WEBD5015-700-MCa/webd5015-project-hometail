@@ -8,19 +8,18 @@ datasource db {
 }
 
 model Dog {
-  id               String  @id @default(auto()) @map("_id") @db.ObjectId
-  name             String
-  breed            String
-  size             String
-  activityLevel    String
-  goodWithKids     Boolean
-  temperament      String
-  shedding    String
+  id             String @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  breed          String
+  size           String
+  activityLevel  String?
+  goodWithKids   Boolean
+  temperament    String?
+  shedding       String
   maintenanceCost String
-  location         String
-  image            String? // Nullable if no image is provided
-  user             User    @relation(fields: [userId], references: [id])
-  userId           String  // userId should be String to match User model's id type
+  location       String?
+  image          String?
+  createdAt      DateTime? @default(now())
 }
 
 model DogBreed {
@@ -30,7 +29,10 @@ model DogBreed {
 
 model User {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
-  email String @unique
-  name  String
-  dogs  Dog[]  // One-to-many relationship with Dog
+  name String?
+  email String? @unique 
+  password String?
+  isSubscribed Boolean @default(false)
+  customerId String? @unique
+  priceId String?
 }
