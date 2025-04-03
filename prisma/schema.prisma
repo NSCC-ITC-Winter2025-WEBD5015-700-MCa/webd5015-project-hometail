@@ -7,30 +7,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Dog {
-  id               String  @id @default(auto()) @map("_id") @db.ObjectId
-  name             String
-  breed            String
-  size             String
-  activityLevel    String
-  goodWithKids     Boolean
-  temperament      String
-  shedding    String
-  maintenanceCost String
-  location         String
-  image            String? // Nullable if no image is provided
-  user             User    @relation(fields: [userId], references: [id])
-  userId           String  // userId should be String to match User model's id type
+model User {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name String?
+  email String? @unique 
+  password String?
+  isSubscribed Boolean @default(false)
+  customerId String? @unique
+  priceId String?
 }
 
 model DogBreed {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   breed String?
 }
 
-model User {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  email String @unique
-  name  String
-  dogs  Dog[]  // One-to-many relationship with Dog
+model Dog {
+  id             String @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  breed          String
+  size           String
+  activityLevel  String?
+  goodWithKids   Boolean
+  temperament    String?
+  shedding       String
+  maintenanceCost String
+  location       String?
+  image          String?
+  createdAt      DateTime? @default(now())
 }
