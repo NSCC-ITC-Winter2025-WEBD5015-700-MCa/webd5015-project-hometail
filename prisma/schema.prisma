@@ -7,6 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model Dog {
   id             String @id @default(auto()) @map("_id") @db.ObjectId
   name           String
@@ -20,13 +21,7 @@ model Dog {
   location       String?
   image          String?
   createdAt      DateTime? @default(now())
-}
-
-model DogBreed {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  breed String?
-}
-
+=======
 model User {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   name String?
@@ -35,4 +30,10 @@ model User {
   isSubscribed Boolean @default(false)
   customerId String? @unique
   priceId String?
+
+}
+
+model DogBreed {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  breed String?
 }
