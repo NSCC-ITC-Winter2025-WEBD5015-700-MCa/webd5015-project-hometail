@@ -1,14 +1,17 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
+import { auth } from "@/auth";
 
 const prisma = new PrismaClient();
 
 export const POST = async (req) => {
   try {
     const body = await req.json();
+    const session = await auth();
 
     // Log body for debugging
-    console.log("Body received:", body);
+    //console.log("Body received:", body);
+    //console.log(session)
 
     const newDog = await prisma.dog.create({
       data: {
@@ -22,6 +25,7 @@ export const POST = async (req) => {
         maintenanceCost: body.costOfMaintenance,
         location: body.dogLocation,
         image: body.dogImage || null,  // Default to empty string if image is null
+        userId: session.user.id
       },
     });
 

@@ -57,6 +57,11 @@ const ListDogForm = () => {
       costOfMaintenance: dogDetails.maintenanceCost,
       dogLocation: dogDetails.location,
       dogImage: dogDetails.image, // Assuming you're handling image uploads separately
+      User: {
+        connect: {
+          id: session?.user?.id, // Ensure the user ID is correctly passed
+        },
+      },
     };
 
     try {
