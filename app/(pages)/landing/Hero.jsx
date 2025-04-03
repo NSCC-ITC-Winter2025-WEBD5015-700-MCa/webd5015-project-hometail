@@ -33,7 +33,7 @@ const Hero = () => {
         <div className="mt-8 flex flex-col sm:flex-row gap-6">
           {/* Adopt Button */}
           <a
-            href="#"
+            href="/pets"
             className="flex items-center gap-x-3 bg-[#F7AFC3] hover:bg-[#F497B3] text-white font-semibold py-5 px-14 rounded-lg text-xl shadow-md transition-all"
           >
             <Image src={button1} alt="Rehome" className="w-12 h-12" />I want to
