@@ -1,8 +1,8 @@
-import Sidebar from "../dashboard/_components/Sidebar";
 import Navbar from "../_components/Navbar";
 import Footer from "../_components/Footer";
+import Sidebar from "../dashboard/_components/Sidebar";
 
-const DashboardLayout = ({ children }) => {
+const SubscribeLayout = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -13,4 +13,4 @@ const DashboardLayout = ({ children }) => {
   );
 };
 
-export default DashboardLayout;
+export default SubscribeLayout;

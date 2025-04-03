@@ -9,8 +9,6 @@ const customerPortalLink =
 const ButtonCustomerPortal = () => {
   const { data: session } = useSession();
 
-  console.log("Session data:", session);
-
   return (
     <div className="flex justify-center">
       <a
