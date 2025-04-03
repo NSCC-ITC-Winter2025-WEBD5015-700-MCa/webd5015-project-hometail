@@ -54,14 +54,14 @@ const LoginForm = ({ setLoading, loading, setError }) => {
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <input
         type="email"
-        className="dark:text-white text-black input input-bordered bg-white dark:bg-[#1D232A]"
+        className="dark:text-white text-black input input-bordered bg-gray-300 dark:bg-[#1D232A]"
         placeholder="Email"
         required
         onFocus={() => setError(null)}
       />
       <input
         type="password"
-        className="dark:text-white text-black input input-bordered bg-white dark:bg-[#1D232A]"
+        className="dark:text-white text-black input input-bordered bg-gray-300 dark:bg-[#1D232A]"
         placeholder="Password"
         required
         onFocus={() => setError(null)}

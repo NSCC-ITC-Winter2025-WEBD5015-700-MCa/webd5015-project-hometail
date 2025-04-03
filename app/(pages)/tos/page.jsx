@@ -14,32 +14,32 @@ const TermsOfService = () => {
         <p className="flex text-lg">
           1. Introduction
           <br />
-          By using APP_NAME, you confirm your acceptance of, and agree to be
+          By using HomeTail, you confirm your acceptance of, and agree to be
           bound by, these terms and conditions.
           <br />
           <br />
           2. Agreement to Terms and Conditions
           <br />
           This agreement takes effect on the date on which you first use the
-          APP_NAME application.
+          HomeTail application.
           <br />
           <br />
           3. Access and License with Termination Rights
           <br />
-          APP_NAME retains the right to terminate access to our app at any time
-          without prior notice. This termination provision provides APP_NAME
+          HomeTail retains the right to terminate access to our app at any time
+          without prior notice. This termination provision provides HomeTail
           with control over software distribution and utilization.
           <br />
           <br />
           4. Refunds
           <br />
-          Due to the nature of digital products, APP_NAME is non-refundable once
+          Due to the nature of digital products, HomeTail is non-refundable once
           access has been granted.
           <br />
           <br />
           5. Disclaimer
           <br />
-          APP_NAME does not warrant that it will meet your specific requirements
+          HomeTail does not warrant that it will meet your specific requirements
           or that its operation will be uninterrupted or error-free. All express
           and implied warranties not stated in this agreement (including without
           limitation, loss of profits, data loss, or business interruptions) are
@@ -48,28 +48,28 @@ const TermsOfService = () => {
           <br />
           6. Warranties and Limitation of Liability
           <br />
-          APP_NAME disclaims all warranties, whether express or implied, as to
+          HomeTail disclaims all warranties, whether express or implied, as to
           the quality, fitness for a particular purpose, or otherwise of the
-          software. APP_NAME shall not be liable for any loss of profit,
+          software. HomeTail shall not be liable for any loss of profit,
           indirect, special, or consequential loss or damage arising from the
           use of its services.
           <br />
           <br />
           7. Responsibilities
           <br />
-          APP_NAME is not responsible for user-generated content or actions
+          HomeTail is not responsible for user-generated content or actions
           taken based on information provided by the app.
           <br />
           <br />
           8. Price Adjustments
           <br />
-          Prices for APP_NAME services may be adjusted as we expand and improve
+          Prices for HomeTail services may be adjusted as we expand and improve
           our offerings.
           <br />
           <br />
           9. General Terms and Law
           <br />
-          This agreement is governed by applicable laws, and APP_NAME is not
+          This agreement is governed by applicable laws, and HomeTail is not
           liable for any representation, act, or omission to act by users.
           <br />
           <br />

@@ -14,22 +14,19 @@ const Login = () => {
     loading: false,
     isEmailLoading: false,
     isGoogleLoading: false,
-    isAppleLoading: false,
   });
 
   return (
     <>
       <Topbar />
-      <div className="flex min-h-[calc(100vh-65px)] flex-col items-center justify-between p-24 text-black">
-        <div className="dark:bg-[#212121] border-2 dark:border-none p-8 rounded-lg shadow-md w-96">
+      <div className="flex min-h-[calc(100vh-65px)] flex-col items-center justify-between p-24 text-black dark:text-white bg-white dark:bg-[#1D232A]">
+        <div className="dark:bg-[#212121] border-2 border-gray-400 dark:border-none p-8 rounded-lg shadow-md w-96">
           <Link href="/" className="absolute">
-            <button className="btn btn-ghost light-text">
+            <button className="btn btn-ghost">
               <FaArrowLeft size={25} />
             </button>
           </Link>
-          <h1 className="text-4xl text-center font-semibold mb-8 light-text dark-text">
-            Login
-          </h1>
+          <h1 className="text-4xl text-center font-semibold mb-8">Login</h1>
 
           {/* Email Login Form */}
           <LoginForm

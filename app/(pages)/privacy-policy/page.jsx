@@ -12,17 +12,17 @@ const PrivacyPolicy = () => {
         </Link>
         <h1 className="text-4xl font-bold">Privacy Policy</h1>
         <p className="flex text-lg">
-          Your privacy is important to us. It is APP_NAME&apos;s policy to
+          Your privacy is important to us. It is HomeTail&apos;s policy to
           respect your privacy regarding any information we may collect from you
           across our website, app, and other sites we own and operate.
           <br />
           <br />
-          APP_NAME is committed to maintaining the privacy and anonymity of all
+          HomeTail is committed to maintaining the privacy and anonymity of all
           users. We do not collect any personal patient information such as
           health card numbers, names, addresses, or any other identifying
           details. All interactions with the app are conducted anonymously to
           ensure the confidentiality of patient data. Any data used within
-          APP_NAME is aggregated and anonymized, with no direct links to
+          HomeTail is aggregated and anonymized, with no direct links to
           individual patients. Our commitment is to safeguard privacy by
           ensuring that only non-identifiable information is processed by the
           app.
@@ -35,7 +35,7 @@ const PrivacyPolicy = () => {
           <br />
           <br />
           You can sign up with your Google account, which will prefill your
-          APP_NAME account username with your name and public profile picture.
+          HomeTail account username with your name and public profile picture.
           <br />
           <br />
           We retain collected information only as long as necessary to provide
@@ -48,8 +48,8 @@ const PrivacyPolicy = () => {
           with third parties, except when required to by law.
           <br />
           <br />
-          APP_NAME acts as a data controller and data processor regarding the
-          personal data processed through APP_NAME and its services, in
+          HomeTail acts as a data controller and data processor regarding the
+          personal data processed through HomeTail and its services, in
           compliance with applicable data protection laws.
           <br />
           <br />
