@@ -1,31 +1,33 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-import { auth } from "@/auth";
+import { v2 as cloudinary } from "cloudinary";
 
 const prisma = new PrismaClient();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export const POST = async (req) => {
   try {
     const body = await req.json();
-    const session = await auth();
 
-    // Log body for debugging
-    //console.log("Body received:", body);
-    //console.log(session)
+    const { image, ...dogDetails } = body;
+
+    let imageUrl = null;
+    if (image) {
+      const uploadedResponse = await cloudinary.uploader.upload(image, {
+        upload_preset: "ml_default",
+      });
+      imageUrl = uploadedResponse.secure_url;
+    }
 
     const newDog = await prisma.dog.create({
       data: {
-        name: body.dogName,  // Ensure correct field name
-        breed: body.dogBreed,
-        size: body.dogSize,
-        activityLevel: body.activityLevel,
-        goodWithKids: body.kidFriendly,  // Should be a boolean (no need for conversion)
-        temperament: body.temperament,
-        shedding: body.sheddingLevel,
-        maintenanceCost: body.costOfMaintenance,
-        location: body.dogLocation,
-        image: body.dogImage || null,  // Default to empty string if image is null
-        userId: session.user.id
+        ...dogDetails,
+        image: imageUrl,
       },
     });
 
