@@ -65,7 +65,6 @@ const ListDogForm = () => {
       maintenanceCost: dogDetails.maintenanceCost,
       location: dogDetails.location,
       image: dogDetails.image,
-      userId: session?.user?.id,
     };
 
     try {
@@ -99,11 +98,10 @@ const ListDogForm = () => {
 
   useEffect(() => {
     if (status === "authenticated" && !session?.user?.isSubscribed) {
-      router.replace("/subscribe"); // Redirect to subscribe page
+      router.replace("/subscribe");
     }
   }, [session, status, router]);
 
-  // Prevent form from rendering if redirecting
   if (
     status === "loading" ||
     (status === "authenticated" && !session?.user?.isSubscribed)
