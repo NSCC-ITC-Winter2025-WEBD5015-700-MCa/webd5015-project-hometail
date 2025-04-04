@@ -27,7 +27,7 @@ const Navbar = () => {
           HomeTail
         </Link>
 
-        {!["/dashboard", "/adoptdog", "/listdog", "/mylistings", "/pets", "/subscribe"].includes(
+        {!["/dashboard", "/adoptdog", "/match-results", "/listdog", "/mylistings", "/pets", "/subscribe"].includes(
           path
         ) && (
           <div className="flex gap-16 items-center max-lg:hidden">
