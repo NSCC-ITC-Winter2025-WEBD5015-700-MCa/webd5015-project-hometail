@@ -51,7 +51,7 @@ const Sidebar = () => {
           </div>
           <div className="mt-4">
             <Link
-              href="#"
+              href="/mylistings"
               className="text-white 
                           hover:text-gray-300"
             >
