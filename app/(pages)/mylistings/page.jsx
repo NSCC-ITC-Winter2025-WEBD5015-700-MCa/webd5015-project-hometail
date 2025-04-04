@@ -62,16 +62,16 @@ const PetList = () => {
                   Shedding: {pet.shedding || "Unknown"}
                 </p>
                 <div className="mt-4">
-                  <Link href="#modify">
-                    <div className="flex space-x-[60%] ">
-                      <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-800 transition duration-200 mt-3 h-12">
-                        Edit
-                      </button>
-                      <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-800 transition duration-200 mt-3 h-12">
-                        Unlist
-                      </button>
-                    </div>
-                  </Link>
+                <Link href="#modify">
+                <div className="flex justify-between ">
+                <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-800 transition duration-200 mt-3 h-12">
+                  Edit
+                </button>
+                <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-800 transition duration-200 mt-3 h-12">
+                  Unlist
+                </button>
+                </div>
+              </Link>
                 </div>
               </div>
             </div>
