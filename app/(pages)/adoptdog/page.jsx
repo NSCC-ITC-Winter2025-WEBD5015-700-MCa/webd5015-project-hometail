@@ -3,11 +3,11 @@
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Loader } from "@/utils/loader";
 
 const AdoptDogForm = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
-  console.log("Session data:", session);
 
   const [preferences, setPreferences] = useState({
     breed: "",
@@ -18,6 +18,7 @@ const AdoptDogForm = () => {
     maintenanceCost: "",
   });
   const [breeds, setBreeds] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch("/api/dogbreeds")
@@ -36,8 +37,6 @@ const AdoptDogForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submit button clicked");
-    console.log("User Preferences:", preferences);
 
     // Convert 'goodWithKids' to boolean for backend consistency
     const preferencesWithBool = {
@@ -47,6 +46,7 @@ const AdoptDogForm = () => {
 
     // Send user preferences to the backend API to find dog matches
     try {
+      setLoading(true);
       const response = await fetch("/api/match", {
         method: "POST",
         headers: {
@@ -57,12 +57,16 @@ const AdoptDogForm = () => {
       const data = await response.json();
       console.log("Matching dogs:", data.matches);
       console.log("AI Description: ", data.aiDescription);
-      // You can also show the results to the user here
+
+      // Store data in localStorage
+      localStorage.setItem("dogMatches", JSON.stringify(data));
+
+      setLoading(false);
+
+      router.push("/match-results");
     } catch (error) {
       console.error("Error fetching matches:", error);
     }
-
-    alert("Form submitted! Check the console for logs.");
   };
 
   useEffect(() => {
@@ -80,28 +84,12 @@ const AdoptDogForm = () => {
   }
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center text-black">
       <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-lg">
-        <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
+        <h2 className="text-2xl font-semibold  text-center mb-4">
           Find Your Perfect Dog
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* <div>
-                <label className="block text-gray-700 font-medium">Breed</label>
-                <select
-                  name="breed"
-                  value={preferences.breed}
-                  onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg"
-                >
-                  <option value="">Select Breed</option>
-                  {breeds.map((breed) => (
-                    <option key={breed._id} value={breed.breed}>
-                      {breed.breed}
-                    </option>
-                  ))}
-                </select>
-              </div> */}
           <div>
             <label className="block text-gray-700 font-medium">
               Activity Level
@@ -188,7 +176,7 @@ const AdoptDogForm = () => {
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg"
           >
-            Find Matches
+            {loading ? <Loader /> : "Find Matches"}
           </button>
         </form>
       </div>
