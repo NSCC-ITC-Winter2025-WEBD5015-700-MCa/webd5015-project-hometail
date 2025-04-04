@@ -8,7 +8,8 @@ const protectedRoutes = [
   "/admin",
   "/adoptdog",
   "/listdog",
-  "/mylistings"
+  "/mylistings",
+  "/match-results"
 ];
 
 export default auth((req) => {
