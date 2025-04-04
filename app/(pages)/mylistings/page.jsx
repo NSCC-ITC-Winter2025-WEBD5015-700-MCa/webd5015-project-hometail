@@ -24,6 +24,38 @@ const PetList = () => {
     fetchPets();
   }, []);
 
+  const updatePet = async (id, petName, status) => {
+    if (window.confirm(`Confirm action on ${petName}?`)) {
+      try {
+        const response = await fetch("/api/updatepet", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            dogId: id,
+            updateData: {
+              isListed: status,
+            },
+          }),
+        });
+  
+        if (!response.ok) throw new Error("Failed to update pet");
+  
+        // Update the local pets state
+        setPets((prevPets) =>
+          prevPets.map((pet) =>
+            pet.id === id ? { ...pet, isListed: status } : pet
+          )
+        );
+      } catch (error) {
+        console.error("Error updating pet:", error);
+      }
+    }
+  };
+  
+ 
+
   if (loading) return <p className="text-center text-lg font-semibold">Loading pets...</p>;
 
   return (
@@ -49,16 +81,17 @@ const PetList = () => {
                 <p className="text-gray-600 text-sm">Activity Level: {pet.activityLevel || "Unknown"}</p>
                 <p className="text-gray-600 text-sm">Shedding: {pet.shedding || "Unknown"}</p>
                 <div className="mt-4">
-                <Link href="#modify">
                 <div className="flex justify-between ">
                 <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-800 transition duration-200 mt-3 h-12">
                   Edit
                 </button>
-                <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-800 transition duration-200 mt-3 h-12">
+                {pet.isListed ? (<button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-800 transition duration-200 mt-3 h-12" onClick={() => updatePet(pet.id, pet.name, false)}>
                   Unlist
-                </button>
+                </button>) : 
+                (<button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-800 transition duration-200 mt-3 h-12" onClick={() => updatePet(pet.id, pet.name, true)}>
+                List
+              </button>)}
                 </div>
-              </Link>
 
                 </div>
               </div>

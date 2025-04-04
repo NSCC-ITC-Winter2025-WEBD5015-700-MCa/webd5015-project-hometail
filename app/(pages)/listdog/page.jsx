@@ -17,6 +17,7 @@ const ListDogForm = () => {
     shedding: "",
     maintenanceCost: "",
     location: "",
+    isListed: true,
     image: null,
   });
   const [breeds, setBreeds] = useState([]);
