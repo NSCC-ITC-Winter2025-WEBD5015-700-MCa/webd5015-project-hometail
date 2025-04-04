@@ -51,6 +51,15 @@ const Sidebar = () => {
           </div>
           <div className="mt-4">
             <Link
+              href="/pets"
+              className="text-white 
+                          hover:text-gray-300"
+            >
+              View All Listings
+            </Link>
+          </div>
+          <div className="mt-4">
+            <Link
               href="/mylistings"
               className="text-white 
                           hover:text-gray-300"
