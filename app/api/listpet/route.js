@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
+import { auth } from "@/auth";
 
 const prisma = new PrismaClient();
 
@@ -11,6 +12,8 @@ cloudinary.config({
 });
 
 export const POST = async (req) => {
+  const session = await auth();
+
   try {
     const body = await req.json();
 
@@ -28,6 +31,7 @@ export const POST = async (req) => {
       data: {
         ...dogDetails,
         image: imageUrl,
+        userId: session.user.id,
       },
     });
 

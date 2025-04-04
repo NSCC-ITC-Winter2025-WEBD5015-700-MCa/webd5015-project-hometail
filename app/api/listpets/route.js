@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export const GET = async () => {
   try {
-    const pets = await prisma.dog.findMany();  // Ensure model name matches schema
+    const pets = await prisma.dog.findMany();
 
     if (!pets || pets.length === 0) {
       return NextResponse.json({ message: "No pets found" }, { status: 404 });
