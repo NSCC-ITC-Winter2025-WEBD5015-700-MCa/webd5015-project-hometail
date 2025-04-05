@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
-import Topbar from "@/app/(pages)/_components/Topbar";
 import LoginForm from "@/app/(pages)/(auth)/login/LoginForm";
 import OAuthButtons from "@/app/(pages)/(auth)/OAuthButtons";
 import ErrorMessage from "@/app/(pages)/_components/ErrorMessage";
@@ -18,7 +17,6 @@ const Login = () => {
 
   return (
     <>
-      <Topbar />
       <div className="flex min-h-[calc(100vh-65px)] flex-col items-center justify-between p-24 text-black dark:text-white bg-white dark:bg-[#1D232A]">
         <div className="dark:bg-[#212121] border-2 border-gray-400 dark:border-none p-8 rounded-lg shadow-md w-96">
           <Link href="/" className="absolute">
