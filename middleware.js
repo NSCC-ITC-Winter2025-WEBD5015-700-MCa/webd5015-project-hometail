@@ -9,6 +9,7 @@ const protectedRoutes = [
   "/adoptdog",
   "/listdog",
   "/mylistings",
+  "/inbox",
   "/match-results"
 ];
 
