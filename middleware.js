@@ -10,6 +10,7 @@ const protectedRoutes = [
   "/listdog",
   "/mylistings",
   "/inbox",
+  "/match-results"
 ];
 
 export default auth((req) => {

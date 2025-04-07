@@ -9,7 +9,7 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex">
+    <div className="flex bg-white dark:bg-[#1D232A]">
       {/* Sidebar */}
       <div
         // Conditional class based on isOpen

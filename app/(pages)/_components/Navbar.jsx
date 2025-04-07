@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { FaPaw } from "react-icons/fa";
+import { Loader } from "@/utils/loader";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -13,11 +14,11 @@ const Navbar = () => {
   const path = usePathname();
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (
-    <nav className="relative text-black shadow-2xs z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 text-lg font-semibold">
+    <nav className="relative text-black shadow-2xs dark:shadow z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 text-lg font-semibold">
       <div className="flex w-full justify-between items-center">
         <Link
           href="/"
@@ -27,7 +28,7 @@ const Navbar = () => {
           HomeTail
         </Link>
 
-        {!["/dashboard", "/adoptdog", "/listdog", "/mylistings", "/pets", "/subscribe"].includes(
+        {!["/login","/dashboard", "/adoptdog", "/match-results", "/listdog", "/mylistings", "/pets", "/subscribe"].includes(
           path
         ) && (
           <div className="flex gap-16 items-center max-lg:hidden">
@@ -57,6 +58,13 @@ const Navbar = () => {
           </div>
         )}
 
+        {path==="/login" && !session
+        && (
+          <div className="flex gap-16 items-center max-lg:hidden">
+            
+          </div>
+        )}
+
         <div className="flex gap-6 items-center max-lg:hidden">
           {session ? (
             <div className="flex gap-6 items-center">
@@ -71,7 +79,7 @@ const Navbar = () => {
                 Logout
               </button>
             </div>
-          ) : (
+          ) : (path !== "/login" && (
             <Link href="/login">
               <button
                 type="button"
@@ -80,7 +88,7 @@ const Navbar = () => {
                 Login/ Register
               </button>
             </Link>
-          )}
+          ))}
           <ThemeSwitch />
         </div>
 
