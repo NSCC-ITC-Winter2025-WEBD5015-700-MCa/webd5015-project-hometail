@@ -10,10 +10,10 @@ const Dashboard = () => {
     <>
       <Navbar />
       <Sidebar />
-      <div className="text-2xl flex justify-center items-center bg-gray-100">
+      <div className="text-2xl flex justify-center items-center bg-white dark:text-white dark:bg-[#1D232A]">
         Your are logged in as: {session?.user?.name ?? "Name not available"}
       </div>
-      <div className="min-h-[100vh] bg-gray-100"></div>
+      <div className="min-h-[100vh] bg-white dark:bg-[#1D232A]"></div>
       <Footer />
     </>
   );
