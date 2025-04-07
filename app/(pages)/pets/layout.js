@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      {session ? <Sidebar /> : null}
+      {session.data ? <Sidebar /> : null}
       <div className="flex-grow">{children}</div>
       <Footer />
     </div>
