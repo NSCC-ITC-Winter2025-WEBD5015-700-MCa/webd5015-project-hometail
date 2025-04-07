@@ -78,6 +78,15 @@ const Sidebar = () => {
           </div>
           <div className="mt-4">
             <Link
+              href="/inbox"
+              className="text-white 
+                          hover:text-gray-300"
+            >
+              My Inbox
+            </Link>
+          </div>
+          <div className="mt-4">
+            <Link
               href="#"
               onClick={() => signOut({ redirect: true, callbackUrl: "/" })}
               className="text-white 

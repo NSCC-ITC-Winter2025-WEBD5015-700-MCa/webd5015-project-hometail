@@ -1,8 +1,10 @@
 "use client";
+
 import { useSession } from "next-auth/react";
 import Sidebar from "./_components/Sidebar";
 import Navbar from "../_components/Navbar";
 import Footer from "../_components/Footer";
+
 const Dashboard = () => {
   const { data: session } = useSession();
 
