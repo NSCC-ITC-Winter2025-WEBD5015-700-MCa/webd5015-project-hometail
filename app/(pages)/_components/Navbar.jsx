@@ -133,7 +133,7 @@ const Navbar = () => {
         <div className="flex justify-between mb-6">
           <ThemeSwitch />
         </div>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 dark:text-white">
           {!hideMainLinks && (
             <>
               <Link href="/#HowItWorks" onClick={() => setOpen(false)}>
