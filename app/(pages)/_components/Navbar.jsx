@@ -22,6 +22,7 @@ const Navbar = () => {
     "/mylistings",
     "/pets",
     "/subscribe",
+    "/inbox"
   ].includes(path);
 
   if (status === "loading") {
