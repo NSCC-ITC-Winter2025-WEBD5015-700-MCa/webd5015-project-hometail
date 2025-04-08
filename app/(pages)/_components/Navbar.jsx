@@ -6,18 +6,30 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { FaPaw } from "react-icons/fa";
+import { Loader } from "@/utils/loader";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { data: session, status } = useSession();
   const path = usePathname();
 
+  const hideMainLinks = [
+    "/login",
+    "/dashboard",
+    "/adoptdog",
+    "/match-results",
+    "/listdog",
+    "/mylistings",
+    "/pets",
+    "/subscribe",
+  ].includes(path);
+
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (
-    <nav className="relative text-black shadow-2xs z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 text-lg font-semibold">
+    <nav className="relative text-black shadow-2xs dark:shadow z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 text-lg font-semibold">
       <div className="flex w-full justify-between items-center">
         <Link
           href="/"
@@ -27,14 +39,9 @@ const Navbar = () => {
           HomeTail
         </Link>
 
-        {!["/dashboard", "/adoptdog", "/listdog", "/mylistings", "/pets", "/subscribe"].includes(
-          path
-        ) && (
+        {!hideMainLinks && (
           <div className="flex gap-16 items-center max-lg:hidden">
-            <Link
-              href="/#HowItWorks"
-              className="link link-hover dark:text-white"
-            >
+            <Link href="/#HowItWorks" className="link link-hover dark:text-white">
               About Us
             </Link>
             <Link href="/adoptdog" className="link link-hover dark:text-white">
@@ -47,10 +54,7 @@ const Navbar = () => {
               FAQs
             </Link>
             {session && (
-              <Link
-                href="/dashboard"
-                className="link link-hover dark:text-white"
-              >
+              <Link href="/dashboard" className="link link-hover dark:text-white">
                 Dashboard
               </Link>
             )}
@@ -72,18 +76,21 @@ const Navbar = () => {
               </button>
             </div>
           ) : (
-            <Link href="/login">
-              <button
-                type="button"
-                className="btn btn-primary text-base max-lg:hidden"
-              >
-                Login/ Register
-              </button>
-            </Link>
+            path !== "/login" && (
+              <Link href="/login">
+                <button
+                  type="button"
+                  className="btn btn-primary text-base max-lg:hidden"
+                >
+                  Login / Register
+                </button>
+              </Link>
+            )
           )}
           <ThemeSwitch />
         </div>
 
+        {/* Mobile Toggle Button */}
         <div
           className={`max-lg:block lg:hidden z-50 ${
             open ? "fixed top-5 right-0" : "relative"
@@ -117,44 +124,63 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Drawer */}
       <div
         className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${
           open ? "translate-x-0" : "translate-x-full"
         } overflow-y-auto`}
       >
-        <div className="flex justify-between">
+        <div className="flex justify-between mb-6">
           <ThemeSwitch />
         </div>
-        <div className="flex flex-col justify-end gap-8 pt-24 light-text dark-text">
-          <Link href="/login" className="flex justify-end py-2 pr-4 text-lg">
-            <button type="button" className="btn btn-primary text-lg">
-              Login/ Register
-            </button>
-          </Link>
-          <Link
-            href="/#HowItWorks"
-            className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500"
-          >
-            About Us
-          </Link>
-          <Link
-            href="/adoptdog"
-            className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500"
-          >
-            Find a pet
-          </Link>
-          <Link
-            href="/listdog"
-            className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500"
-          >
-            List a pet
-          </Link>
-          <Link
-            href="/#FAQ"
-            className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500"
-          >
-            FAQs
-          </Link>
+        <div className="flex flex-col gap-6 dark:text-white">
+          {!hideMainLinks && (
+            <>
+              <Link href="/#HowItWorks" onClick={() => setOpen(false)}>
+                About Us
+              </Link>
+              <Link href="/adoptdog" onClick={() => setOpen(false)}>
+                Find a pet
+              </Link>
+              <Link href="/listdog" onClick={() => setOpen(false)}>
+                List a pet
+              </Link>
+              <Link href="/#FAQ" onClick={() => setOpen(false)}>
+                FAQs
+              </Link>
+              {session && (
+                <Link href="/dashboard" onClick={() => setOpen(false)}>
+                  Dashboard
+                </Link>
+              )}
+            </>
+          )}
+
+          {session ? (
+            <>
+              <span className="text-black dark:text-white">
+                {session.user?.email}
+              </span>
+              <button
+                type="button"
+                className="btn btn-primary text-base"
+                onClick={() => {
+                  setOpen(false);
+                  signOut({ redirect: true, callbackUrl: "/" });
+                }}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            path !== "/login" && (
+              <Link href="/login" onClick={() => setOpen(false)}>
+                <button className="btn btn-primary text-base">
+                  Login / Register
+                </button>
+              </Link>
+            )
+          )}
         </div>
       </div>
     </nav>

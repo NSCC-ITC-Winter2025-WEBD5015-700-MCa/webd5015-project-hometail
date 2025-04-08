@@ -5,7 +5,11 @@ const prisma = new PrismaClient();
 
 export const GET = async () => {
   try {
-    const pets = await prisma.dog.findMany();
+    const pets = await prisma.dog.findMany({
+      where: {
+        isListed: true
+      }
+    });
 
     if (!pets || pets.length === 0) {
       return NextResponse.json({ message: "No pets found" }, { status: 404 });

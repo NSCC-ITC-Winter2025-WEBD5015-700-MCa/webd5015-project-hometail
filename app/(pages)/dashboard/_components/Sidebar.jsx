@@ -9,7 +9,7 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex">
+    <div className="flex bg-white dark:bg-[#1D232A]">
       {/* Sidebar */}
       <div
         // Conditional class based on isOpen
@@ -74,6 +74,15 @@ const Sidebar = () => {
                           hover:text-gray-300"
             >
               My Subscriptions
+            </Link>
+          </div>
+          <div className="mt-4">
+            <Link
+              href="/inbox"
+              className="text-white 
+                          hover:text-gray-300"
+            >
+              My Inbox
             </Link>
           </div>
           <div className="mt-4">
