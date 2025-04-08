@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import ThemeSwitch from "./ThemeSwitch";
 import { useState } from "react";
@@ -22,8 +22,17 @@ const Navbar = () => {
     "/mylistings",
     "/pets",
     "/subscribe",
-    "/inbox"
-  ].includes(path);
+    "/inbox",
+    new RegExp('^/editListPet/')
+  ];
+
+  // Check if the current pathname should hide the main links
+  const shouldHideMainLinks = hideMainLinks.some((route) => {
+    if (route instanceof RegExp) {
+      return route.test(path);  // Use .test() to check if the dynamic route matches
+    }
+    return route === path;  // Check if the static path matches
+  });
 
   if (status === "loading") {
     return <Loader />;
@@ -40,7 +49,7 @@ const Navbar = () => {
           HomeTail
         </Link>
 
-        {!hideMainLinks && (
+        {!shouldHideMainLinks && (
           <div className="flex gap-16 items-center max-lg:hidden">
             <Link href="/#HowItWorks" className="link link-hover dark:text-white">
               About Us
@@ -93,9 +102,7 @@ const Navbar = () => {
 
         {/* Mobile Toggle Button */}
         <div
-          className={`max-lg:block lg:hidden z-50 ${
-            open ? "fixed top-5 right-0" : "relative"
-          }`}
+          className={`max-lg:block lg:hidden z-50 ${open ? "fixed top-5 right-0" : "relative"}`}
         >
           <label className="btn btn-link swap swap-rotate dark-text light-text">
             <input
@@ -127,15 +134,13 @@ const Navbar = () => {
 
       {/* Mobile Drawer */}
       <div
-        className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${
-          open ? "translate-x-0" : "translate-x-full"
-        } overflow-y-auto`}
+        className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
       >
         <div className="flex justify-between mb-6">
           <ThemeSwitch />
         </div>
         <div className="flex flex-col gap-6 dark:text-white">
-          {!hideMainLinks && (
+          {!shouldHideMainLinks && (
             <>
               <Link href="/#HowItWorks" onClick={() => setOpen(false)}>
                 About Us
