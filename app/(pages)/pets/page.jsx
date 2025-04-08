@@ -53,15 +53,13 @@ const PetList = () => {
   };
 
   if (loading)
-    return <p className="text-center text-lg font-semibold">Loading pets...</p>;
+    return <p className="text-center text-lg font-semibold dark:text-white">Loading pets...</p>;
 
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-3xl font-bold text-center mb-8 text-black dark:text-white">
         Pets Available for Adoption
       </h2>
-Name="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">Pets Available for Adoption</h2>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {pets.length > 0 ? (
           pets.map((pet) => (
