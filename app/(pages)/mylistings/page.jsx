@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const PetList = () => {
   const [pets, setPets] = useState([]);
@@ -88,7 +89,6 @@ const PetList = () => {
                 </button>
 
                 </Link>
-                <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-800 transition duration-200 mt-3 h-12">
 
                 {pet.isListed ? (<button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-800 transition duration-200 mt-3 h-12" onClick={() => updatePet(pet.id, pet.name, false)}>
 
