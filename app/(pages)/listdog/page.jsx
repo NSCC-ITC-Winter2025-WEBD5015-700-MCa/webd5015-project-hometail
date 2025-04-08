@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Loader } from "@/utils/loader";
 
 const ListDogForm = () => {
   const router = useRouter();
@@ -21,6 +22,7 @@ const ListDogForm = () => {
     image: null,
   });
   const [breeds, setBreeds] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // Fetch breeds from the backend API on component mount
   useEffect(() => {
@@ -69,6 +71,7 @@ const ListDogForm = () => {
     };
 
     try {
+      setLoading(true);
       const response = await fetch("/api/listpet", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -78,6 +81,8 @@ const ListDogForm = () => {
       if (!response.ok) throw new Error("Failed to list dog");
 
       alert("Dog listed successfully!");
+      setLoading(false);
+      router.push("/mylistings");
 
       setDogDetails({
         name: "",
@@ -94,6 +99,7 @@ const ListDogForm = () => {
     } catch (error) {
       console.error("Error:", error);
       alert("Error listing dog. Please try again.");
+      setLoading(false);
     }
   };
 
@@ -286,7 +292,7 @@ const ListDogForm = () => {
               type="submit"
               className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg"
             >
-              List Dog
+              {loading ? <Loader /> : "List Dog"}
             </button>
           </form>
         </div>
