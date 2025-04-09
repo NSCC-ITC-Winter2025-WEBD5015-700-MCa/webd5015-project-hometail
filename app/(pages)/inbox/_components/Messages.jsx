@@ -66,7 +66,7 @@ const Messages = ({ selectedChatId }) => {
   }, [selectedChatId]);
 
   return (
-    <div className="w-3/4 p-5 overflow-y-auto flex flex-col gap-4">
+    <div className="w-3/4 p-5 overflow-y-auto flex flex-col gap-4 max-lg:w-full flex-grow">
       <div className="flex flex-col flex-grow gap-4 overflow-y-scroll">
         {loading ? (
           <div className="flex items-center justify-center w-full h-full">

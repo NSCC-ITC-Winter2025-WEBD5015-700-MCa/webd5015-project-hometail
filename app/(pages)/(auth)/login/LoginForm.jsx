@@ -40,8 +40,8 @@ const LoginForm = ({ setLoading, loading, setError }) => {
 
         setLoading({ loading: false, isEmailLoading: false });
       } else {
-        // Redirect to the dashboard if login is successful
-        router.push("/dashboard");
+        // Redirect to the pets if login is successful
+        router.push("/pets");
       }
     } catch (error) {
       setError("Error, try again");

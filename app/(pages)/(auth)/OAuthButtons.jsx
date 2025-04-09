@@ -13,7 +13,7 @@ const OAuthButtons = () => {
 
   const handleGoogleSignIn = () => {
     setLoading({ isGoogleLoading: true });
-    setTimeout(() => signIn("google", { redirectTo: "/dashboard" }), 2000);
+    setTimeout(() => signIn("google", { redirectTo: "/pets" }), 2000);
   };
 
   return (

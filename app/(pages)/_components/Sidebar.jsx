@@ -21,24 +21,6 @@ const Sidebar = () => {
       >
         {/* Sidebar content */}
         <div className="flex flex-col items-center">
-          <div className="mt-4">
-            <Link
-              href="/dashboard"
-              className="text-white 
-                          hover:text-gray-300"
-            >
-              Home
-            </Link>
-          </div>
-          <div className="mt-4">
-            <Link
-              href="/adoptdog"
-              className="text-white 
-                          hover:text-gray-300"
-            >
-              Adopt a Dog
-            </Link>
-          </div>
           {/* Add more sidebar items here */}
           <div className="mt-4">
             <Link

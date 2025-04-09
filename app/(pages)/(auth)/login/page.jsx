@@ -17,7 +17,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="flex min-h-[calc(100vh-65px)] flex-col items-center justify-between p-24 text-black dark:text-white bg-white dark:bg-[#1D232A]">
+      <div className="flex flex-col items-center justify-between p-24 text-black dark:text-white">
         <div className="dark:bg-[#212121] border-2 border-gray-400 dark:border-none p-8 rounded-lg shadow-md w-96">
           <Link href="/" className="absolute">
             <button className="btn btn-ghost">

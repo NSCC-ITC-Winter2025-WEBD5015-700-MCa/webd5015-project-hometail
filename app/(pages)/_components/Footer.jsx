@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <>
       <div className="flex flex-col items-center w-full text-black dark:text-white mt-10">
-        <footer className="footer footer-center rounded py-4 text-base">
+        <footer className="footer footer-center rounded py-4 text-base max-lg:flex max-lg:flex-col">
           <nav className="flex gap-6">
             <a
               href="mailto:projecthometail@gmail.com"

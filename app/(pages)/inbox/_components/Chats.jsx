@@ -1,6 +1,6 @@
 const Chats = ({ chats, onChatClick }) => {
   return (
-    <div className="text-black dark:text-white overflow-y-auto w-1/4 border-r border-black dark:border-white">
+    <div className="text-black dark:text-white overflow-y-auto w-1/4 max-lg:w-full border-r border-black dark:border-white">
       {chats &&
         chats.map((chat) => (
           <div
