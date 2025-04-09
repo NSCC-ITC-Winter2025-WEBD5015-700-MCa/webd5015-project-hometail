@@ -104,7 +104,7 @@ const PetList = () => {
             </div>
           ))
         ) : (
-          <p className="text-center col-span-full text-gray-500">No pets available for adoption yet.</p>
+          <p className="text-center col-span-full text-gray-500">You have no pets listed for adoption.</p>
         )}
       </div>
     </div>

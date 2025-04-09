@@ -3,10 +3,20 @@
 import React, { useState } from "react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { Loader } from "@/utils/loader";
 
 const Sidebar = () => {
   // State to manage the open/close state of the sidebar
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <Loader />
+  }
+
+  console.log(session);
+
 
   return (
     <div className="flex bg-white dark:bg-[#1D232A]">
@@ -22,6 +32,15 @@ const Sidebar = () => {
         {/* Sidebar content */}
         <div className="flex flex-col items-center">
           {/* Add more sidebar items here */}
+          {session?.user?.role === "admin" ? (<div className="mt-4">
+            <Link
+              href="/admin"
+              className="text-white 
+                          hover:text-gray-300"
+            >
+              Admin Dashboard
+            </Link>
+          </div>) : null}
           <div className="mt-4">
             <Link
               href="/listdog"
