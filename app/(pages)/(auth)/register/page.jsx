@@ -1,7 +1,5 @@
-// src/app/Register.js
 "use client";
 
-import Topbar from "@/app/(pages)/_components/Topbar";
 import RegisterForm from "@/app/(pages)/(auth)/register/RegisterForm";
 import OAuthButtons from "@/app/(pages)/(auth)/OAuthButtons";
 import Link from "next/link";
@@ -13,8 +11,7 @@ const Register = () => {
   const [success, setSuccess] = useState("");
   return (
     <>
-      <Topbar />
-      <div className="flex min-h-screen flex-col items-center justify-between p-24 text-black">
+      <div className="flex flex-col items-center justify-between p-24 text-black dark:text-white">
         <div className="dark:bg-[#212121] border-2 dark:border-none px-8 pt-8 pb-4 rounded-lg shadow-md w-96">
           <h1 className="text-4xl text-center font-semibold mb-8 light-text dark-text">
             Register

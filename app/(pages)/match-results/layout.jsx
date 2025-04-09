@@ -1,4 +1,4 @@
-import Sidebar from "../dashboard/_components/Sidebar";
+import Sidebar from "../_components/Sidebar";
 import Navbar from "../_components/Navbar";
 import Footer from "../_components/Footer";
 

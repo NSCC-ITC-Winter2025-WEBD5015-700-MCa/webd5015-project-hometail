@@ -47,7 +47,7 @@ const Inbox = () => {
       ) : (
         <div
           id="inbox"
-          className="w-full h-full flex border rounded-lg border-black text-black dark:text-white dark:border-white"
+          className="w-full h-full flex max-lg:flex-col border rounded-lg border-black text-black dark:text-white dark:border-white"
         >
           <Chats chats={chats} onChatClick={handleChatClick} />
           <Messages selectedChatId={selectedChatId} />

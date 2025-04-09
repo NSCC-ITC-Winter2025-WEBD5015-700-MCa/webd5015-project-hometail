@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import ThemeSwitch from "./ThemeSwitch";
 import { useState } from "react";
@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const hideMainLinks = [
     "/login",
-    "/dashboard",
+    "/register",
     "/adoptdog",
     "/match-results",
     "/listdog",
@@ -23,15 +23,15 @@ const Navbar = () => {
     "/pets",
     "/subscribe",
     "/inbox",
-    new RegExp('^/editListPet/')
+    new RegExp("^/editListPet/"),
   ];
 
   // Check if the current pathname should hide the main links
   const shouldHideMainLinks = hideMainLinks.some((route) => {
     if (route instanceof RegExp) {
-      return route.test(path);  // Use .test() to check if the dynamic route matches
+      return route.test(path); // Use .test() to check if the dynamic route matches
     }
-    return route === path;  // Check if the static path matches
+    return route === path; // Check if the static path matches
   });
 
   if (status === "loading") {
@@ -39,7 +39,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="relative text-black shadow-2xs dark:shadow z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 text-lg font-semibold">
+    <nav className="relative text-black dark:text-white bg-white dark:bg-[#1D232A] shadow-2xs dark:shadow z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 text-lg font-semibold">
       <div className="flex w-full justify-between items-center">
         <Link
           href="/"
@@ -51,7 +51,10 @@ const Navbar = () => {
 
         {!shouldHideMainLinks && (
           <div className="flex gap-16 items-center max-lg:hidden">
-            <Link href="/#HowItWorks" className="link link-hover dark:text-white">
+            <Link
+              href="/#HowItWorks"
+              className="link link-hover dark:text-white"
+            >
               About Us
             </Link>
             <Link href="/adoptdog" className="link link-hover dark:text-white">
@@ -63,11 +66,6 @@ const Navbar = () => {
             <Link href="/#FAQ" className="link link-hover dark:text-white">
               FAQs
             </Link>
-            {session && (
-              <Link href="/dashboard" className="link link-hover dark:text-white">
-                Dashboard
-              </Link>
-            )}
           </div>
         )}
 
@@ -102,7 +100,9 @@ const Navbar = () => {
 
         {/* Mobile Toggle Button */}
         <div
-          className={`max-lg:block lg:hidden z-50 ${open ? "fixed top-5 right-0" : "relative"}`}
+          className={`max-lg:block lg:hidden z-50 ${
+            open ? "fixed top-5 right-0" : "relative"
+          }`}
         >
           <label className="btn btn-link swap swap-rotate dark-text light-text">
             <input
@@ -134,7 +134,9 @@ const Navbar = () => {
 
       {/* Mobile Drawer */}
       <div
-        className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"} overflow-y-auto`}
+        className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${
+          open ? "translate-x-0" : "translate-x-full"
+        } overflow-y-auto`}
       >
         <div className="flex justify-between mb-6">
           <ThemeSwitch />
@@ -154,11 +156,6 @@ const Navbar = () => {
               <Link href="/#FAQ" onClick={() => setOpen(false)}>
                 FAQs
               </Link>
-              {session && (
-                <Link href="/dashboard" onClick={() => setOpen(false)}>
-                  Dashboard
-                </Link>
-              )}
             </>
           )}
 
