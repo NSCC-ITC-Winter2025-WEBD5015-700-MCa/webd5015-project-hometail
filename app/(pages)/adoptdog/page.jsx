@@ -4,6 +4,18 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Loader } from "@/utils/loader";
+import { z } from "zod";
+
+// Zod schema
+const adoptSchema = z.object({
+  activity: z.string().min(1, "Activity level is required"),
+  goodWithKids: z.enum(["true", "false"], {
+    errorMap: () => ({ message: "Please select if good with kids" }),
+  }),
+  temperament: z.string().min(1, "Temperament is required"),
+  shedding: z.string().min(1, "Shedding level is required"),
+  maintenanceCost: z.string().min(1, "Maintenance cost is required"),
+});
 
 const AdoptDogForm = () => {
   const router = useRouter();
@@ -19,6 +31,7 @@ const AdoptDogForm = () => {
   });
   const [breeds, setBreeds] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     fetch("/api/dogbreeds")
@@ -33,10 +46,16 @@ const AdoptDogForm = () => {
       ...prev,
       [name]: value,
     }));
+    setErrors((prev) => ({ ...prev, [name]: "" })); 
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      // Validate preferences using Zod
+      adoptSchema.parse(preferences);
+      setErrors({});
 
     // Convert 'goodWithKids' to boolean for backend consistency
     const preferencesWithBool = {
@@ -45,7 +64,7 @@ const AdoptDogForm = () => {
     };
 
     // Send user preferences to the backend API to find dog matches
-    try {
+  
       setLoading(true);
       const response = await fetch("/api/match", {
         method: "POST",
@@ -54,6 +73,7 @@ const AdoptDogForm = () => {
         },
         body: JSON.stringify(preferencesWithBool), // Send the modified preferences
       });
+
       const data = await response.json();
       console.log("Matching dogs:", data.matches);
       console.log("AI Description: ", data.aiDescription);
@@ -64,8 +84,16 @@ const AdoptDogForm = () => {
       setLoading(false);
 
       router.push("/match-results");
-    } catch (error) {
-      console.error("Error fetching matches:", error);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        const fieldErrors = {};
+        err.errors.forEach((error) => {
+          fieldErrors[error.path[0]] = error.message;
+        });
+        setErrors(fieldErrors);
+      } else {
+        console.error("Submission error:", err);
+      }
     }
   };
 
@@ -86,10 +114,11 @@ const AdoptDogForm = () => {
   return (
     <div className="flex justify-center items-center text-black">
       <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-lg">
-        <h2 className="text-2xl font-semibold  text-center mb-4">
+        <h2 className="text-2xl font-semibold text-center mb-4">
           Find Your Perfect Dog
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Activity Level */}
           <div>
             <label className="block text-gray-700 font-medium">
               Activity Level
@@ -105,7 +134,12 @@ const AdoptDogForm = () => {
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
+            {errors.activity && (
+              <p className="text-red-600 text-sm mt-1">{errors.activity}</p>
+            )}
           </div>
+
+          {/* Good With Kids */}
           <div>
             <label className="block text-gray-700 font-medium">
               Good with Kids
@@ -120,7 +154,12 @@ const AdoptDogForm = () => {
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
+            {errors.goodWithKids && (
+              <p className="text-red-600 text-sm mt-1">{errors.goodWithKids}</p>
+            )}
           </div>
+
+          {/* Temperament */}
           <div>
             <label className="block text-gray-700 font-medium">
               Temperament
@@ -139,7 +178,12 @@ const AdoptDogForm = () => {
               <option value="playful">Playful</option>
               <option value="protective">Protective</option>
             </select>
+            {errors.temperament && (
+              <p className="text-red-600 text-sm mt-1">{errors.temperament}</p>
+            )}
           </div>
+
+          {/* Shedding Level */}
           <div>
             <label className="block text-gray-700 font-medium">
               Shedding Level
@@ -155,7 +199,12 @@ const AdoptDogForm = () => {
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
+            {errors.shedding && (
+              <p className="text-red-600 text-sm mt-1">{errors.shedding}</p>
+            )}
           </div>
+
+          {/* Maintenance Cost */}
           <div>
             <label className="block text-gray-700 font-medium">
               Maintenance Cost
@@ -171,7 +220,14 @@ const AdoptDogForm = () => {
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
+            {errors.maintenanceCost && (
+              <p className="text-red-600 text-sm mt-1">
+                {errors.maintenanceCost}
+              </p>
+            )}
           </div>
+
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg"
