@@ -111,12 +111,12 @@ const MatchResults = () => {
           AI Recommendations
         </h2>
         <div className="space-y-4">
-          <div>
+        <div>
             <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-              Key Tips
+              Reason
             </h3>
             <p className="text-gray-700 dark:text-gray-300">
-              {matches.aiDescription.key_tips}
+              {matches.aiDescription.reason}
             </p>
           </div>
           <div>
@@ -129,10 +129,10 @@ const MatchResults = () => {
           </div>
           <div>
             <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-              Reason
+              Key Tips
             </h3>
             <p className="text-gray-700 dark:text-gray-300">
-              {matches.aiDescription.reason}
+              {matches.aiDescription.key_tips}
             </p>
           </div>
         </div>

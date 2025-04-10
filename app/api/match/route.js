@@ -67,7 +67,7 @@ async function refineMatchesWithAI(matchNames, matchIDs, matchBreeds) {
       messages: [
         {
           role: "user",
-          content: `I am looking to adopt a dog. Based on the dataset, the best matches for me are: ${matchNames} and their IDs are ${matchIDs}. Their breeds are ${matchBreeds}.
+          content: `I am looking to adopt a dog. Based on the dataset, the best matches for me are: ${matchNames}, their breeds are ${matchBreeds}, and their IDs are ${matchIDs} respectively.
           My preferences are:
           - Activity level: ${savedPreferences.activity}
           - Good with kids: ${savedPreferences.goodWithKids}
