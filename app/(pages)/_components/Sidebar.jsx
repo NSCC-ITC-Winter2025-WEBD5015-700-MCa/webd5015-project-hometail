@@ -15,8 +15,6 @@ const Sidebar = () => {
     return <Loader />
   }
 
-  console.log(session);
-
 
   return (
     <div className="flex bg-white dark:bg-[#1D232A]">
