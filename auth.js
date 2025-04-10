@@ -56,6 +56,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             email: user.email,
             name: user.name,
             isSubscribed: user.isSubscribed,
+            role: user.role,
           };
         } catch (error) {
           console.log(error);
@@ -95,12 +96,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 email: user.email,
                 isSubscribed: false,
                 name: user.name || "",
+                role: "user",
               },
             });
           }
           user.id = existingUser.id;
           user.isSubscribed = existingUser.isSubscribed;
           user.name = existingUser.name || user.name;
+          user.role = existingUser.role;
 
           return true;
         } catch (error) {
@@ -118,6 +121,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           email: user.email,
           name: user.name,
           isSubscribed: user.isSubscribed,
+          role: user.role,
         };
       } else if (trigger === "update" && session) {
         token.name = session.name;
@@ -129,6 +133,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       session.user.email = token.email;
       session.user.name = token.name;
       session.user.isSubscribed = token.isSubscribed;
+      session.user.role = token.role;
 
       return session;
     },

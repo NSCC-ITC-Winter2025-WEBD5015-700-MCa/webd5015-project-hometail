@@ -11,6 +11,7 @@ const UsersTable = () => {
     name: "",
     email: "",
     isSubscribed: false,
+    role: ""
   });
 
   useEffect(() => {
@@ -72,6 +73,7 @@ const UsersTable = () => {
       name: user.name,
       email: user.email,
       isSubscribed: user.isSubscribed,
+      role: user.role || "user",
     });
   };
 
@@ -97,11 +99,9 @@ const UsersTable = () => {
                 Subscribed
               </th>
               <th className="border border-gray-300 px-4 py-2 text-left">
-                Customer ID
+                User role
               </th>
-              <th className="border border-gray-300 px-4 py-2 text-left">
-                Price ID
-              </th>
+
               <th className="border border-gray-300 px-4 py-2">Actions</th>
             </tr>
           </thead>
@@ -164,16 +164,29 @@ const UsersTable = () => {
                     <span className="text-red-600 font-semibold">No</span>
                   )}
                 </td>
-
-                {/* Customer ID */}
-                <td className="border border-gray-300 px-4 py-2">
-                  {user.customerId}
+                {/* Role Toggle */}
+                <td className="border border-gray-300 px-4 py-2 text-center">
+                  {editingUserId === user.id ? (
+                    <select
+                      className="border p-1 rounded"
+                      value={editData.role || "user"}
+                      onChange={(e) =>
+                        setEditData({
+                          ...editData,
+                          role: e.target.value,
+                        })
+                      }
+                    >
+                      <option value="user">User</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  ) : user.role === "user" ? (
+                    <span className="text-green-600 font-semibold">User</span>
+                  ) : (
+                    <span className="text-red-600 font-semibold">Admin</span>
+                  )}
                 </td>
 
-                {/* Price ID */}
-                <td className="border border-gray-300 px-4 py-2">
-                  {user.priceId}
-                </td>
 
                 {/* Actions */}
                 <td className="border border-gray-300 px-4 py-2 text-center space-x-1">

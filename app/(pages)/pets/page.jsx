@@ -5,10 +5,12 @@ import { useState, useEffect } from "react";
 import placeholder from "@/public/placeholder.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const PetList = () => {
   const [pets, setPets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {data: session, status} = useSession();
 
   const router = useRouter();
 
@@ -91,14 +93,14 @@ const PetList = () => {
                 <p className="text-gray-600 text-sm">
                   Shedding: {pet.shedding || "Unknown"}
                 </p>
-                <div className="mt-4">
+                {session?.user?.isSubscribed ? (<div className="mt-4">
                   <button
                     className="bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-500 transition duration-200 mt-3"
                     onClick={() => adoptClick(pet.userId)}
                   >
                     Adopt {pet.name}
                   </button>
-                </div>
+                </div>) : <button className="bg-red-400 text-white px-4 py-2 rounded hover:bg-red-500 transition duration-200 mt-3" onClick={() => router.push("/subscribe")}>Subscribe to adopt {pet.name}</button>}
               </div>
             </div>
           ))

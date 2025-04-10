@@ -16,6 +16,7 @@ const Navbar = () => {
   const hideMainLinks = [
     "/login",
     "/register",
+    "/admin",
     "/adoptdog",
     "/match-results",
     "/listdog",
