@@ -15,8 +15,6 @@ const Sidebar = () => {
     return <Loader />
   }
 
-  console.log(session);
-
 
   return (
     <div className="flex bg-white dark:bg-[#1D232A]">
@@ -43,11 +41,20 @@ const Sidebar = () => {
           </div>) : null}
           <div className="mt-4">
             <Link
+              href="/adoptdog"
+              className="text-white 
+                          hover:text-gray-300"
+            >
+              Find your Perfect Dog
+            </Link>
+          </div>
+          <div className="mt-4">
+            <Link
               href="/listdog"
               className="text-white 
                           hover:text-gray-300"
             >
-              List a Dog for Adoption
+              List Dog for Adoption
             </Link>
           </div>
           <div className="mt-4">

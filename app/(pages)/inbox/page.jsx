@@ -11,8 +11,8 @@ const Inbox = () => {
   const [chats, setChats] = useState([]);
   const [selectedChatId, setSelectedChatId] = useState(null);
   const [loading, setLoading] = useState(false);
-  const session = useSession();
-
+  const { data: session, status } = useSession(); // Destructure data as 'session'
+  
   const fetchConversations = async () => {
     setLoading(true);
     try {
@@ -24,7 +24,6 @@ const Inbox = () => {
       }
 
       const data = await response.json();
-
       setChats(data.chats);
     } catch (error) {
       console.error("Error fetching conversations:", error);
@@ -37,18 +36,23 @@ const Inbox = () => {
     fetchConversations();
   }, []);
 
+  if (status === "loading") return <Loader />;
+
+
+  const isSubscribed = session.user?.isSubscribed;
+
   const handleChatClick = (chatId) => {
     setSelectedChatId(chatId);
   };
 
   return (
-    session?.user?.isSubscribed ? (
-      <>
-        {loading ? (
-          <div className="flex items-center justify-center w-full h-full">
-            <Loader />
-          </div>
-        ) : (
+    <>
+      {loading ? (
+        <div className="flex items-center justify-center w-full h-full">
+          <Loader />
+        </div>
+      ) : (
+        isSubscribed ? (
           <div
             id="inbox"
             className="w-full h-full flex max-lg:flex-col border rounded-lg border-black text-black dark:text-white dark:border-white"
@@ -56,13 +60,12 @@ const Inbox = () => {
             <Chats chats={chats} onChatClick={handleChatClick} />
             <Messages selectedChatId={selectedChatId} />
           </div>
-        )}
-      </>
-    ) : (
-      <Subscribe />
-    )
+        ) : (
+          <Subscribe />
+        )
+      )}
+    </>
   );
-  
 };
 
 export default Inbox;
