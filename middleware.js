@@ -14,6 +14,14 @@ const protectedRoutes = [
 
 const adminRoutes = ["/admin"];
 
+const premiumRoutes = [
+  "/adoptdog",
+  "/listdog",
+  "/inbox",
+  "/match-results"
+
+]
+
 export default auth((req) => {
   const isLoggedIn = !!req.auth;
   const pathname = req.nextUrl.pathname;
@@ -28,8 +36,16 @@ export default auth((req) => {
     (route) => pathname === route || pathname.startsWith(`${route}/`)
   );
 
+  const isPremiumRoute = premiumRoutes.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`)
+  )
+
   if (isProtectedRoute && !isLoggedIn) {
     return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  if (isPremiumRoute && session.user.isSubscribed !== true) {
+    return NextResponse.redirect(new URL("/subscribe", req.url));
   }
 
   if (isAdminRoute && session.user.role !== "admin") {
