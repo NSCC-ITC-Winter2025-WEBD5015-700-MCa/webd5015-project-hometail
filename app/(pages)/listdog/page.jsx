@@ -44,7 +44,7 @@ const ListDogForm = () => {
     maintenanceCost: "",
     location: "",
     isListed: true,
-    image: null,
+    image: "",
   });
 
   const [formErrors, setFormErrors] = useState({});
