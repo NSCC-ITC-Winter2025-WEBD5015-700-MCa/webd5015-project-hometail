@@ -34,7 +34,7 @@ const RegisterForm = ({ setSuccess, setError }) => {
 
       if (res.status === 200) {
         setSuccess("Account created successfully! Please login.");
-        //timeout for 2 seconds then redirect to login page with router push
+        //timeout for 2 seconds then redirect to login page
         setTimeout(() => {
           router.push("/login");
         }, 2000);
