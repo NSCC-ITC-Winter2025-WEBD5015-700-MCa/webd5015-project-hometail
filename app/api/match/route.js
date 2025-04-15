@@ -7,8 +7,13 @@ let dogs = [];
 // Fetch data from the API (async function)
 const allDogs = async () => {
   try {
-    // Fetch data from your API
-    const response = await fetch("/api/getdogs"); // This api will later be called as an environmantal variable
+    const baseUrl =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000"
+        : "https://webd5015-project-hometail-cb8d.vercel.app";
+
+    const response = await fetch(`${baseUrl}/api/getdogs`);
+    // This api will later be called as an environmantal variable
 
     // Check if response is ok
     if (!response.ok) {
@@ -39,12 +44,22 @@ function findMatches(preferences) {
 
   let matches = dogs.filter(
     (dog) =>
-      (preferences.size !== undefined ? preferences.size === preferences.size : true) &&
-      (preferences.activity !== undefined ? preferences.activity === preferences.activity : true) &&
-      (preferences.goodWithKids !== undefined ? dog.goodWithKids === preferences.goodWithKids : true) &&
-      (preferences.temperament !== undefined ? dog.temperament === preferences.temperament : true) &&
+      (preferences.size !== undefined
+        ? preferences.size === preferences.size
+        : true) &&
+      (preferences.activity !== undefined
+        ? preferences.activity === preferences.activity
+        : true) &&
+      (preferences.goodWithKids !== undefined
+        ? dog.goodWithKids === preferences.goodWithKids
+        : true) &&
+      (preferences.temperament !== undefined
+        ? dog.temperament === preferences.temperament
+        : true) &&
       (preferences.shedding ? dog.shedding === preferences.shedding : true) &&
-      (preferences.maintenanceCost ? dog.maintenanceCost === preferences.maintenanceCost : true)
+      (preferences.maintenanceCost
+        ? dog.maintenanceCost === preferences.maintenanceCost
+        : true)
   );
 
   // If no exact matches found, return closest matches based on size and activity level
@@ -105,20 +120,19 @@ async function refineMatchesWithAI(matchNames, matchIDs, matchBreeds) {
     // Extract JSON part from AI response
     const jsonStart = aiText.indexOf("{");
     const jsonEnd = aiText.lastIndexOf("}");
-    
+
     if (jsonStart === -1 || jsonEnd === -1) {
       throw new Error("AI response does not contain valid JSON.");
     }
 
     const jsonResponse = aiText.substring(jsonStart, jsonEnd + 1);
     return JSON.parse(jsonResponse); // Safely parse the extracted JSON
-
   } catch (error) {
     console.error("Error refining matches with AI:", error);
-    return { 
-      selected_dogs: [], 
-      reason: "AI could not generate a valid response.", 
-      user_preferences: savedPreferences 
+    return {
+      selected_dogs: [],
+      reason: "AI could not generate a valid response.",
+      user_preferences: savedPreferences,
     };
   }
 }
@@ -138,17 +152,32 @@ export async function POST(req) {
 
     // If matches are found, refine them using AI
     if (matches.length > 0) {
-      const matchIDs = matches.map(dog => dog.id).join(", ");
-      const matchNames = matches.map(dog => dog.name).join(", ");
-      const matchBreeds = matches.map(dog => dog.breed).join(", ");
-      const aiResponse = await refineMatchesWithAI(matchNames, matchIDs, matchBreeds);
+      const matchIDs = matches.map((dog) => dog.id).join(", ");
+      const matchNames = matches.map((dog) => dog.name).join(", ");
+      const matchBreeds = matches.map((dog) => dog.breed).join(", ");
+      const aiResponse = await refineMatchesWithAI(
+        matchNames,
+        matchIDs,
+        matchBreeds
+      );
 
-      return new Response(JSON.stringify({ matches, aiDescription: aiResponse }), { status: 200 });
+      return new Response(
+        JSON.stringify({ matches, aiDescription: aiResponse }),
+        { status: 200 }
+      );
     } else {
-      return new Response(JSON.stringify({ matches: [], aiDescription: "No exact matches found." }), { status: 200 });
+      return new Response(
+        JSON.stringify({
+          matches: [],
+          aiDescription: "No exact matches found.",
+        }),
+        { status: 200 }
+      );
     }
   } catch (error) {
     console.error("Error handling POST request:", error);
-    return new Response(JSON.stringify({ error: "An error occurred." }), { status: 500 });
+    return new Response(JSON.stringify({ error: "An error occurred." }), {
+      status: 500,
+    });
   }
 }
