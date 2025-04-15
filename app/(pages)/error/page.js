@@ -6,7 +6,7 @@ const ForbiddenPage = () => {
       <div className="text-center bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <h1 className="text-4xl font-bold text-red-600 mb-4">403 - Forbidden</h1>
         <p className="text-xl text-gray-700 mb-6">
-          You don't have permission to view this page.
+          You don&apos;t have permission to view this page.
         </p>
         <a
           href="/"
