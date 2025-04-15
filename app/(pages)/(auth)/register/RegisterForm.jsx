@@ -4,9 +4,11 @@
 import { useState } from "react";
 import { MdOutlineEmail } from "react-icons/md";
 import { Loader } from "@/utils/loader";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = ({ setSuccess, setError }) => {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +34,10 @@ const RegisterForm = ({ setSuccess, setError }) => {
 
       if (res.status === 200) {
         setSuccess("Account created successfully! Please login.");
+        //timeout for 2 seconds then redirect to login page
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
       } else if (res.status === 400) {
         setError("This email address is already in use.");
       }
