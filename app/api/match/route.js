@@ -8,7 +8,7 @@ let dogs = [];
 const allDogs = async () => {
   try {
     // Fetch data from your API
-    const response = await fetch(`${process.env.VERCEL_URL}/api/getdogs`); // This api will later be called as an environmantal variable
+    const response = await fetch("/api/getdogs"); // This api will later be called as an environmantal variable
 
     // Check if response is ok
     if (!response.ok) {
