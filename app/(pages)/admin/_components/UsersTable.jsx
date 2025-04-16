@@ -79,11 +79,11 @@ const UsersTable = () => {
 
   return (
     <div className="overflow-x-auto min-h-screen px-5">
-      <h1 className="text-4xl pb-5">Users</h1>
+      <h1 className="text-4xl pb-5 dark:text-white">Users</h1>
       {loading ? (
         <Loader />
       ) : (
-        <table className="w-full border-collapse border border-gray-200">
+        <table className="w-full border-collapse border border-gray-200 dark:text-white">
           <thead>
             <tr>
               <th className="border border-gray-300 px-4 py-2 text-left">
